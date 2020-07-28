@@ -2,8 +2,10 @@ package com.sungbin.musicinformator.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.google.gson.JsonObject
 import com.sungbin.musicinformator.R
 import com.sungbin.musicinformator.`interface`.GeniusInterface
+import com.sungbin.musicinformator.utils.LogUtils
 import com.sungbin.musicinformator.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
@@ -23,19 +25,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val test = client.create(GeniusInterface :: class.java)
-        /*Runnable {
-            test.getAccentData().enqueue(object : Callback<JSONObject> {
-                override fun onFailure(call: Call<JSONObject>, t: Throwable) {
-                    toast(t.message.toString())
+        val test = client.create(GeniusInterface :: class.java).getAccountData()
+        Runnable {
+            test.enqueue(object : Callback<JsonObject> {
+                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                    LogUtils.log(t.localizedMessage, t.message)
                 }
 
-                override fun onResponse(call: Call<JSONObject>, response: Response<JSONObject>) {
-                    toast(response.toString())
+                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                    toast(call.request().url.toString())
+                    LogUtils.log(response.body()?.toString(), response.code())
                 }
             })
-        }.run()*/
-
-        toast("run.")
+        }.run()
     }
 }
