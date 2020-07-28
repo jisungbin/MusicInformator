@@ -1,17 +1,13 @@
 package com.sungbin.musicinformator.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.google.gson.JsonObject
+import androidx.appcompat.app.AppCompatActivity
 import com.sungbin.musicinformator.R
 import com.sungbin.musicinformator.`interface`.GeniusInterface
 import com.sungbin.musicinformator.utils.LogUtils
-import com.sungbin.musicinformator.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
-import org.json.JSONObject
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 import retrofit2.Retrofit
 import javax.inject.Inject
 
@@ -25,18 +21,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val test = client.create(GeniusInterface :: class.java).getAccountData()
-        Runnable {
-            test.enqueue(object : Callback<JsonObject> {
-                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                    LogUtils.log(t.localizedMessage, t.message)
-                }
+        client
+            .create(GeniusInterface::class.java).run {
+                getAccountData()
+                    .subscribeOn(Schedulers.computation())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        LogUtils.log(it)
+                    }, { throwable ->
+                        LogUtils.log(throwable)
+                    })
+            }
 
-                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-                    toast(call.request().url.toString())
-                    LogUtils.log(response.body()?.toString(), response.code())
-                }
-            })
-        }.run()
     }
 }

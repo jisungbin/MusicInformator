@@ -40,12 +40,13 @@ object Versions {
     const val Room = "2.1.0-alpha06"
     const val Paging = "2.1.0-beta01"
 
-    const val Retrofit = "2.9.0"
     const val OkHttp = "4.8.0"
+    const val Retrofit = "2.9.0"
+    const val RxRetrofit = "2.9.0"
 
     const val RxJava = "3.0.4"
-    const val RxAndroid = "3.0.0"
     const val RxKotlin = "3.0.0"
+    const val RxAndroid = "3.0.0"
 }
 
 object Dependencies {
@@ -59,6 +60,7 @@ object Dependencies {
     object Network {
         const val Retrofit = "com.squareup.okhttp3:okhttp:${Versions.OkHttp}"
         const val OkHttp = "com.squareup.retrofit2:retrofit:${Versions.Retrofit}"
+        const val RxRetrofit = "com.squareup.retrofit2:adapter-rxjava3:${Versions.RxRetrofit}"
     }
 
     object Rx {
