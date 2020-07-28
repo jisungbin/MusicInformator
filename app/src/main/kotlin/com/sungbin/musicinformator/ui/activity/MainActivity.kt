@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
                     .subscribeOn(Schedulers.computation())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({
-                        LogUtils.log(it)
+                        LogUtils.json(it.toString())
                     }, { throwable ->
                         LogUtils.log(throwable)
                     })
