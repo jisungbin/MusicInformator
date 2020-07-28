@@ -29,6 +29,7 @@ object Versions {
     const val CardView = "1.0.0"
     const val ConstraintLayout = "1.1.3"
 
+    const val GsonConverter = "2.6.2"
     const val AndroidUtils = "3.1.5"
     const val CrashReporter = "1.1.0"
 
@@ -94,6 +95,7 @@ object Dependencies {
     object Utils {
         const val AndroidUtils = "com.github.sungbin5304:AndroidUtils:${Versions.AndroidUtils}"
         const val CrashReporter = "com.balsikandar.android:crashreporter:${Versions.CrashReporter}"
+        const val GsonConverter = "com.squareup.retrofit2:converter-gson:${Versions.GsonConverter}"
     }
 
     object Animator {

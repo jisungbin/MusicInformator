@@ -77,6 +77,7 @@ dependencies {
 
     implementation(Dependencies.Utils.AndroidUtils)
     implementation(Dependencies.Utils.CrashReporter)
+    implementation(Dependencies.Utils.GsonConverter)
 
     implementation(Dependencies.Animator.Tool)
     implementation(Dependencies.Animator.Yoyo)
