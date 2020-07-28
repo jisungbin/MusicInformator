@@ -1,2 +1,2 @@
 # MusicInformator
-hilt + mvvm + rx + retrofit2 + okhttp3 + room + paging +  livedata + databinding
+a music information finder application with dagger-hilt, mvvm, rxjava, rxkotlin, rxandroid, retrofit2, okhttp3, room, paging, livedata and databinding.
