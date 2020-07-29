@@ -4,6 +4,7 @@ import com.google.gson.JsonObject
 import io.reactivex.rxjava3.core.Flowable
 import retrofit2.http.GET
 import retrofit2.http.Headers
+import retrofit2.http.Streaming
 
 
 /**
@@ -12,6 +13,7 @@ import retrofit2.http.Headers
 
 interface GeniusInterface {
 
+    @Streaming
     @Headers("Authorization: Bearer IbJtuUNSL2rYRk-ZdGkIqg9IKoyyE3KXrqOHF5FvfKlnr69jmlNwQ7u-7ydeYrjW")
     @GET("account")
     fun getAccountData(): Flowable<JsonObject>

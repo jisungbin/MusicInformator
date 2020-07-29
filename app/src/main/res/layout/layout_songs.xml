@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="SongItem"
+            type="com.sungbin.musicinformator.model.SongItem" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:background="@drawable/bg_gradient_main"
+        tools:context=".ui.activity.MainActivity"
+        tools:ignore="MissingConstraints,SmallSp"
+        tools:padding="@dimen/margin_default">
+
+        <com.sungbin.sungbintool.ui.TagableRoundImageView
+            android:id="@+id/triv_song_cover"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/sample_album_image"
+            app:triv_imageRadius="@dimen/margin_half" />
+
+        <TextView
+            android:id="@+id/tv_song_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_half"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:text="@{SongItem.name}"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_song_artist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_twice_half"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:text="@{SongItem.artist}"
+            android:textColor="@color/colorLightGray"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+</layout>

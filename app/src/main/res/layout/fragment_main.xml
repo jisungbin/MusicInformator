@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/margin_default"
+    tools:background="@drawable/bg_gradient_main"
+    tools:ignore="MissingConstraints">
+
+    <Space
+        android:id="@+id/space_margin"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+
+    <TextView
+        android:id="@+id/tv_recently_played"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/recently_played"
+        android:textColor="@color/colorWhite"
+        android:textSize="25sp"
+        app:layout_constraintTop_toBottomOf="@id/space_margin" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_recently_played"
+        android:layout_width="match_parent"
+        android:layout_height="175dp"
+        android:layout_marginTop="@dimen/margin_default"
+        android:orientation="vertical"
+        android:overScrollMode="never"
+        android:scrollbars="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@+id/tv_recently_played"
+        tools:listitem="@layout/layout_songs" />
+
+    <TextView
+        android:id="@+id/tv_songs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_default"
+        android:text="@string/song"
+        android:textColor="@color/colorWhite"
+        android:textSize="25sp"
+        app:layout_constraintTop_toBottomOf="@+id/rv_recently_played" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_songs"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_default"
+        android:overScrollMode="never"
+        android:scrollbars="vertical"
+        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_songs"
+        app:spanCount="3"
+        tools:listitem="@layout/layout_songs" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

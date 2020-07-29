@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">MusicInformator</string>
     <string name="loading">불러오는중...</string>
+    <string name="main">메인</string>
+    <string name="search">검색</string>
+    <string name="library">라이브러리</string>
+    <string name="setting">설정</string>
+    <string name="album_image">Album Image</string>
+    <string name="sample_song_name">Sexual</string>
+    <string name="sample_song_artist">Neiked</string>
+    <string name="music_action_button">Music Action Button</string>
+    <string name="recently_played">최근 재생한 곡</string>
+    <string name="song">노래</string>
 </resources>
