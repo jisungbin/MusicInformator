@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MusicInformator</string>
+    <string name="loading">불러오는중...</string>
 </resources>
