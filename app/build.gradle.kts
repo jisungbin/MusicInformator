@@ -63,6 +63,7 @@ dependencies {
     implementation(Dependencies.Network.OkHttp)
     implementation(Dependencies.Network.Retrofit)
     implementation(Dependencies.Network.RxRetrofit)
+    implementation(Dependencies.Network.LoggingInterceptor)
 
     implementation(Dependencies.Rx.Java)
     implementation(Dependencies.Rx.Kotlin)
