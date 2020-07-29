@@ -3,8 +3,10 @@ package com.sungbin.musicinformator.ui.activity
 import android.app.AlertDialog
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import com.sungbin.musicinformator.R
 import com.sungbin.musicinformator.`interface`.GeniusInterface
+import com.sungbin.musicinformator.databinding.ActivityMainBinding
 import com.sungbin.musicinformator.ui.dialog.ProgressDialog
 import com.sungbin.musicinformator.utils.LogUtils
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,9 +25,14 @@ class MainActivity : AppCompatActivity() {
         ProgressDialog(this)
     }
 
+    private lateinit var binding: ActivityMainBinding
+
+    var text = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.activity = this
 
         client
             .create(GeniusInterface::class.java).run {
@@ -34,7 +41,8 @@ class MainActivity : AppCompatActivity() {
                     .subscribeOn(Schedulers.computation())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({
-                        LogUtils.json(it.toString())
+                        text = it.toString()
+                        binding.invalidateAll()
                     }, { throwable ->
                         LogUtils.log(throwable)
                     }, {
