@@ -4,7 +4,7 @@ object Application {
     const val minSdk = 21
     const val targetSdk = 29
     const val compileSdk = 29
-    const val versionCode = 2
+    const val versionCode = 9
     const val jvmTarget = "1.8"
     const val versionName = "1.0.0"
 
@@ -19,8 +19,8 @@ object Versions {
     const val CoreKtx = "1.3.0"
     const val AppCompat = "1.0.2"
     const val FragmentKtx = "1.2.5"
-    const val LifeCycleExtensions = "2.2.0"
     const val LifeCycleViewModel = "2.2.0"
+    const val LifeCycleExtensions = "2.2.0"
 
     const val Hilt = "2.28-alpha"
     const val HiltAndroidX = "1.0.0-alpha01"
@@ -29,8 +29,8 @@ object Versions {
     const val CardView = "1.0.0"
     const val ConstraintLayout = "1.1.3"
 
-    const val GsonConverter = "2.6.2"
     const val AndroidUtils = "3.1.5"
+    const val GsonConverter = "2.6.2"
     const val CrashReporter = "1.1.0"
 
     const val AnimatorLottie = "3.4.0"
@@ -94,6 +94,7 @@ object Dependencies {
     object Ui {
         const val Glide = "com.github.bumptech.glide:glide:${Versions.Glide}"
         const val CardView = "androidx.cardview:cardview:${Versions.CardView}"
+        const val GlideCompiler = "com.github.bumptech.glide:compiler:${Versions.Glide}"
         const val ConstraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.ConstraintLayout}"
     }
 

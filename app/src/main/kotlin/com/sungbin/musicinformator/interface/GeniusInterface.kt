@@ -12,8 +12,6 @@ import retrofit2.http.Streaming
  */
 
 interface GeniusInterface {
-
-    @Streaming
     @Headers("Authorization: Bearer IbJtuUNSL2rYRk-ZdGkIqg9IKoyyE3KXrqOHF5FvfKlnr69jmlNwQ7u-7ydeYrjW")
     @GET("account")
     fun getAccountData(): Flowable<JsonObject>

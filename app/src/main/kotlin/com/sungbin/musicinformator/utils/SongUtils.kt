@@ -18,7 +18,7 @@ object SongUtils {
         val uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
         val selection = "${MediaStore.Audio.Media.IS_MUSIC} != 0"
         val sortOrder = "${MediaStore.Audio.Media.TITLE} ASC"
-        return contentResolver.query(uri, null, selection, null, sortOrder)?.use{
+        return contentResolver.query(uri, null, selection, null, sortOrder)?.use {
             if (it.count > 0) {
                 while (it.moveToNext()) {
                     val trackId =

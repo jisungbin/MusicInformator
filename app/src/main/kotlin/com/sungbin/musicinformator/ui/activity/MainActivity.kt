@@ -1,7 +1,9 @@
 package com.sungbin.musicinformator.ui.activity
 
+import android.Manifest
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.commitNow
 import com.sungbin.musicinformator.R
 import com.sungbin.musicinformator.ui.fragment.main.MainFragment
@@ -17,5 +19,7 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.commitNow {
             replace(R.id.fl_container, MainFragment.newInstance())
         }
+
+        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1000)
     }
 }

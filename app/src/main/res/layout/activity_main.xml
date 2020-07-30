@@ -14,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_above="@id/bnv_navigation"
-        app:layout_constraintBottom_toTopOf="@+id/bnv_navigation"
+        android:layout_marginBottom="@dimen/margin_half"
+        app:layout_constraintBottom_toTopOf="@+id/ll_playing_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -30,7 +31,7 @@
         android:paddingTop="@dimen/margin_half"
         android:paddingEnd="@dimen/margin_default"
         android:paddingBottom="@dimen/margin_half"
-        app:layout_constraintBottom_toBottomOf="@+id/view_Line">
+        app:layout_constraintBottom_toTopOf="@+id/bnv_navigation">
 
         <com.sungbin.sungbintool.ui.TagableRoundImageView
             android:id="@+id/triv_song_cover"
@@ -110,14 +111,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <View
-        android:id="@+id/view_Line"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:alpha=".2"
-        android:background="@color/colorBlack"
-        app:layout_constraintBottom_toBottomOf="@+id/fl_container" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bnv_navigation"

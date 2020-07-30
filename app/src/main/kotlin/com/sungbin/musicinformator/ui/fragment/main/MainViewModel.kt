@@ -10,6 +10,7 @@ class MainViewModel : ViewModel() {
 
     val recentlySongsItem: MutableLiveData<List<SongItem>> = MutableLiveData()
     val songsItem: MutableLiveData<List<SongItem>> = MutableLiveData()
+
     fun initSongs(context: Context) {
         songsItem.value = SongUtils.getAllAudioData(context)
     }

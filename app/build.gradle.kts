@@ -89,6 +89,7 @@ dependencies {
     implementation(Dependencies.AndroidX.RoomRuntime)
     implementation(Dependencies.AndroidX.PagingRuntime)
 
+    kapt(Dependencies.Ui.GlideCompiler)
     kapt(Dependencies.AndroidX.RoomCompiler)
     kapt(Dependencies.Di.HiltGoogleCompiler)
     kapt(Dependencies.Di.HiltAndroidXCompiler)

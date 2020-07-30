@@ -24,7 +24,7 @@
             android:id="@+id/triv_song_cover"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/sample_album_image"
+            app:imageUrl="@{SongItem.albumImageUrl}"
             app:triv_imageRadius="@dimen/margin_half" />
 
         <TextView

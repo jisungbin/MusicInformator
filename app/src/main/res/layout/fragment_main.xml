@@ -6,7 +6,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/margin_default"
+    android:paddingTop="@dimen/margin_default"
+    android:paddingBottom="@dimen/margin_default"
     tools:background="@drawable/bg_gradient_main"
     tools:ignore="MissingConstraints">
 
@@ -16,6 +17,8 @@
         android:layout_height="40dp" />
 
     <TextView
+        android:paddingStart="@dimen/margin_default"
+        android:paddingEnd="@dimen/margin_default"
         android:id="@+id/tv_recently_played"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,14 +32,19 @@
         android:layout_width="match_parent"
         android:layout_height="175dp"
         android:layout_marginTop="@dimen/margin_default"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:overScrollMode="never"
-        android:scrollbars="horizontal"
+        android:scrollbars="none"
+        android:paddingStart="@dimen/margin_default"
+        android:paddingEnd="@dimen/margin_default"
+        android:clipToPadding="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@+id/tv_recently_played"
         tools:listitem="@layout/layout_songs" />
 
     <TextView
+        android:paddingStart="@dimen/margin_default"
+        android:paddingEnd="@dimen/margin_default"
         android:id="@+id/tv_songs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -52,7 +60,10 @@
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/margin_default"
         android:overScrollMode="never"
-        android:scrollbars="vertical"
+        android:scrollbars="none"
+        android:paddingStart="@dimen/margin_default"
+        android:paddingEnd="@dimen/margin_default"
+        android:clipToPadding="false"
         app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_songs"
