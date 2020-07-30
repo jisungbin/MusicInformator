@@ -16,11 +16,7 @@ class SearchViewModel : ViewModel() {
     }
 
     fun initRecentlySongs() {
-        recentlySongsItem.apply {
-            val items = arrayListOf<SongItem>()
-            for (i in 0..10) items.add(SongUtils.getTestSongItem())
-            value = items
-        }
+        recentlySongsItem.value = SongUtils.sampleSongItemList
     }
 
 }

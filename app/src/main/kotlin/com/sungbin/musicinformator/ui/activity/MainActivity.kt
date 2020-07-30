@@ -13,6 +13,7 @@ import com.sungbin.musicinformator.ui.fragment.search.SearchFragment
 import com.sungbin.musicinformator.utils.SongUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.random.Random
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -22,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        binding.songItem = SongUtils.getTestSongItem()
+        binding.songItem = SongUtils.sampleSongItemList.random()
         binding.invalidateAll()
 
         supportFragmentManager.commitNow {
@@ -44,7 +45,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.menu_search -> {
                     supportFragmentManager.commitNow {
-                        replace(R.id.fl_container, SearchFragment.newInstance())
+                        replace(R.id.fl_container, SearchFragment.instance())
                     }
                 }
                 R.id.menu_library -> {

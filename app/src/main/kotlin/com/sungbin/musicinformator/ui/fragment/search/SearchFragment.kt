@@ -2,6 +2,7 @@ package com.sungbin.musicinformator.ui.fragment.search
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.viewModels
@@ -14,14 +15,17 @@ import com.sungbin.musicinformator.ui.dialog.ProgressDialog
 import com.sungbin.musicinformator.ui.fragment.BaseFragment
 import com.sungbin.musicinformator.utils.LogUtils
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.WithFragmentBindings
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_search.*
+import kotlinx.android.synthetic.main.layout_searched_song.*
 import retrofit2.Retrofit
 import javax.inject.Inject
 
 
 @AndroidEntryPoint
+@WithFragmentBindings
 class SearchFragment : BaseFragment() {
 
     companion object {
@@ -29,7 +33,7 @@ class SearchFragment : BaseFragment() {
             SearchFragment()
         }
 
-        fun newInstance() = instance
+        fun instance() = instance
     }
 
     @Inject
@@ -48,6 +52,8 @@ class SearchFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        retainInstance = false
 
         val activity = requireActivity()
 
@@ -105,6 +111,7 @@ class SearchFragment : BaseFragment() {
                                     LogUtils.log(throwable)
                                 }, {
                                     tv_searched_songs.text = getString(R.string.search_result)
+                                    iv_remove.visibility = View.INVISIBLE
                                     loadingDialog.close()
                                 })
                         }

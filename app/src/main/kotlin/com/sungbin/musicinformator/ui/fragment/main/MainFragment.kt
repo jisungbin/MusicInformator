@@ -35,7 +35,7 @@ class MainFragment : BaseFragment() {
         if (viewModel.songsItem.value.isNullOrEmpty())
             viewModel.initSongs(activity)
         if (viewModel.recentlySongsItem.value.isNullOrEmpty())
-            viewModel.testRecentlySongs(activity)
+            viewModel.initRecentlySongs()
 
         rv_recently_played.adapter =
             RecentlySongsAdapter(viewModel.recentlySongsItem.value ?: listOf(), activity)

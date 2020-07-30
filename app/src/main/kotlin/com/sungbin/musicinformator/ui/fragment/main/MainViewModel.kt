@@ -15,37 +15,7 @@ class MainViewModel : ViewModel() {
         songsItem.value = SongUtils.getAllAudioData(context)
     }
 
-    fun testRecentlySongs(context: Context) {
-        recentlySongsItem.value = arrayListOf(
-            SongItem(
-                "Sexual",
-                "Neiked",
-                "https://musicmeta-phinf.pstatic.net/album/000/662/662857.jpg?type=r204Fll&v=20200218185711",
-                0L,
-                0L
-            ),
-            SongItem(
-                "Sexual",
-                "Neiked",
-                "https://musicmeta-phinf.pstatic.net/album/000/662/662857.jpg?type=r204Fll&v=20200218185711",
-                0L,
-                0L
-            ),
-            SongItem(
-                "Sexual",
-                "Neiked",
-                "https://musicmeta-phinf.pstatic.net/album/000/662/662857.jpg?type=r204Fll&v=20200218185711",
-                0L,
-                0L
-            ),
-            SongItem(
-                "Sexual",
-                "Neiked",
-                "htps://musicmeta-phinf.pstatic.net/album/000/662/662857.jpg?type=r204Fll&v=20200218185711",
-                0L,
-                0L
-            )
-        )
+    fun initRecentlySongs() {
+        recentlySongsItem.value = SongUtils.sampleSongItemList
     }
-
 }
