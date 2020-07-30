@@ -27,10 +27,6 @@ class SearchedSongsAdapter constructor(
     class ViewHolder(private val songItemBinding: LayoutSearchedSongBinding) :
         RecyclerView.ViewHolder(songItemBinding.root) {
 
-        init {
-            songItemBinding.lifecycleOwner = songItemBinding.root.context as LifecycleOwner
-        }
-
         fun bindViewHolder(item: SongItem) {
             songItemBinding.tvSongArtist.isSelected = true
             songItemBinding.tvSongName.isSelected = true

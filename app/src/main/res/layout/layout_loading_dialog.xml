@@ -11,10 +11,14 @@
     tools:context=".ui.activity.MainActivity"
     tools:ignore="MissingConstraints" >
 
-    <ProgressBar
-        android:id="@+id/pb_progress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lav_load"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/load_songs"
+        app:lottie_renderMode="hardware" />
 
     <TextView
         android:layout_marginStart="@dimen/margin_twice"
@@ -26,7 +30,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/pb_progress"
+        app:layout_constraintStart_toEndOf="@+id/lav_load"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

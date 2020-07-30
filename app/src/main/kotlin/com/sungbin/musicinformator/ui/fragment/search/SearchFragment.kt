@@ -17,7 +17,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_search.*
-import kotlinx.android.synthetic.main.fragment_search.et_search
 import retrofit2.Retrofit
 import javax.inject.Inject
 
@@ -59,7 +58,7 @@ class SearchFragment : BaseFragment() {
 
         viewModel.recentlySongsItem.observe(viewLifecycleOwner, Observer {
             rv_recently_searched.adapter =
-                SearchedSongsAdapter(viewModel.recentlySongsItem.value ?: listOf(), activity)
+                SearchedSongsAdapter(it ?: listOf(), activity)
         })
 
         et_search.imeOptions = EditorInfo.IME_ACTION_SEARCH
@@ -75,16 +74,21 @@ class SearchFragment : BaseFragment() {
                                 .subscribe({ jsonObject ->
                                     jsonObject?.let {
                                         val searchedSongs = arrayListOf<SongItem>()
-                                        val jsonData = it.getAsJsonObject("response").getAsJsonArray("hits")
+                                        val jsonData =
+                                            it.getAsJsonObject("response").getAsJsonArray("hits")
 
                                         for (element in jsonData) {
                                             element?.let { json ->
-                                                val resultJson = json.asJsonObject.getAsJsonObject("result")
-                                                val title = resultJson["title"].toString().replace("\"", "")
+                                                val resultJson =
+                                                    json.asJsonObject.getAsJsonObject("result")
+                                                val title =
+                                                    resultJson["title"].toString().replace("\"", "")
                                                 val artist =
-                                                    resultJson.getAsJsonObject("primary_artist")["name"].toString().replace("\"", "")
+                                                    resultJson.getAsJsonObject("primary_artist")["name"].toString()
+                                                        .replace("\"", "")
                                                 val albumUrl =
-                                                    resultJson["song_art_image_url"].toString().replace("\"", "")
+                                                    resultJson["song_art_image_url"].toString()
+                                                        .replace("\"", "")
                                                 val songId = resultJson["id"].toString().toInt()
                                                 val item = SongItem(
                                                     title,
@@ -100,7 +104,7 @@ class SearchFragment : BaseFragment() {
                                 }, { throwable ->
                                     LogUtils.log(throwable)
                                 }, {
-                                    tv_recently_search.text = getString(R.string.search_result)
+                                    tv_searched_songs.text = getString(R.string.search_result)
                                     loadingDialog.close()
                                 })
                         }

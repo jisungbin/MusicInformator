@@ -38,6 +38,7 @@
             tools:layout_height="2dp"/>
 
         <TextView
+            android:layout_marginEnd="@dimen/margin_half"
             android:id="@+id/tv_song_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -55,6 +56,7 @@
             tools:text="@string/sample_song_name" />
 
         <TextView
+            android:layout_marginEnd="@dimen/margin_half"
             android:id="@+id/tv_song_artist"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
