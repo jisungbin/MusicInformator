@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.NonNull
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.sungbin.musicinformator.R
 import com.sungbin.musicinformator.databinding.LayoutSearchedSongBinding
@@ -18,14 +19,17 @@ import com.sungbin.musicinformator.model.SongItem
  * Created by SungBin on 2020-07-20.
  */
 
-class SearchedSongsAdapter constructor
-    (
+class SearchedSongsAdapter constructor(
     val items: List<SongItem>,
     val activity: Activity
 ) : RecyclerView.Adapter<SearchedSongsAdapter.ViewHolder>() {
 
     class ViewHolder(private val songItemBinding: LayoutSearchedSongBinding) :
         RecyclerView.ViewHolder(songItemBinding.root) {
+
+        init {
+            songItemBinding.lifecycleOwner = songItemBinding.root.context as LifecycleOwner
+        }
 
         fun bindViewHolder(item: SongItem) {
             songItemBinding.tvSongArtist.isSelected = true

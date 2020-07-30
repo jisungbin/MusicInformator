@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.sungbin.musicinformator.R
 import com.sungbin.musicinformator.`interface`.GeniusInterface
 import com.sungbin.musicinformator.adapter.SearchedSongsAdapter
@@ -32,7 +33,6 @@ class SearchFragment : BaseFragment() {
         fun newInstance() = instance
     }
 
-
     @Inject
     lateinit var client: Retrofit
 
@@ -57,8 +57,10 @@ class SearchFragment : BaseFragment() {
         if (viewModel.recentlySongsItem.value.isNullOrEmpty())
             viewModel.initRecentlySongs()
 
-        rv_recently_searched.adapter =
-            SearchedSongsAdapter(viewModel.recentlySongsItem.value ?: listOf(), activity)
+        viewModel.recentlySongsItem.observe(viewLifecycleOwner, Observer {
+            rv_recently_searched.adapter =
+                SearchedSongsAdapter(viewModel.recentlySongsItem.value ?: listOf(), activity)
+        })
 
         et_search.imeOptions = EditorInfo.IME_ACTION_SEARCH
         et_search.setOnEditorActionListener { _, actionId, _ ->
@@ -78,11 +80,11 @@ class SearchFragment : BaseFragment() {
                                         for (element in jsonData) {
                                             element?.let { json ->
                                                 val resultJson = json.asJsonObject.getAsJsonObject("result")
-                                                val title = resultJson["title"].toString()
+                                                val title = resultJson["title"].toString().replace("\"", "")
                                                 val artist =
-                                                    resultJson.getAsJsonObject("primary_artist")["name"].toString()
+                                                    resultJson.getAsJsonObject("primary_artist")["name"].toString().replace("\"", "")
                                                 val albumUrl =
-                                                    resultJson["song_art_image_url"].toString()
+                                                    resultJson["song_art_image_url"].toString().replace("\"", "")
                                                 val songId = resultJson["id"].toString().toInt()
                                                 val item = SongItem(
                                                     title,
@@ -98,8 +100,8 @@ class SearchFragment : BaseFragment() {
                                 }, { throwable ->
                                     LogUtils.log(throwable)
                                 }, {
+                                    tv_recently_search.text = getString(R.string.search_result)
                                     loadingDialog.close()
-                                    rv_recently_searched!!.adapter?.notifyDataSetChanged()
                                 })
                         }
                     return@setOnEditorActionListener true

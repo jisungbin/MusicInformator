@@ -19,9 +19,8 @@ data class SongItem(
     var songId: Int = 0
 ) {
     companion object {
-
         @JvmStatic
-        @BindingAdapter("bind:imageUrl")
+        @BindingAdapter("imageUrl")
         fun loadImage(imageView: ImageView, url: String?) {
             GlideApp
                 .with(imageView.context)

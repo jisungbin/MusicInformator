@@ -15,4 +15,5 @@
     <string name="recently_search">최근 검색</string>
     <string name="remove">remove</string>
     <string name="songs_empty">저장된 노래가 없어요</string>
+    <string name="search_result">검색 결과</string>
 </resources>
