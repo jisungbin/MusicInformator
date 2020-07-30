@@ -9,6 +9,7 @@ import androidx.annotation.NonNull
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.sungbin.musicinformator.R
+import com.sungbin.musicinformator.databinding.LayoutSearchedSongBinding
 import com.sungbin.musicinformator.databinding.LayoutSongItemBinding
 import com.sungbin.musicinformator.model.SongItem
 
@@ -17,13 +18,13 @@ import com.sungbin.musicinformator.model.SongItem
  * Created by SungBin on 2020-07-20.
  */
 
-class RecentlySongsAdapter constructor
+class SearchedSongsAdapter constructor
     (
     val items: List<SongItem>,
     val activity: Activity
-) : RecyclerView.Adapter<RecentlySongsAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<SearchedSongsAdapter.ViewHolder>() {
 
-    class ViewHolder(private val songItemBinding: LayoutSongItemBinding) :
+    class ViewHolder(private val songItemBinding: LayoutSearchedSongBinding) :
         RecyclerView.ViewHolder(songItemBinding.root) {
 
         fun bindViewHolder(item: SongItem) {
@@ -38,7 +39,7 @@ class RecentlySongsAdapter constructor
         ViewHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(activity),
-                R.layout.layout_song_item, viewGroup, false
+                R.layout.layout_searched_song, viewGroup, false
             )
         )
 
@@ -55,7 +56,7 @@ class RecentlySongsAdapter constructor
                 state: RecyclerView.State
             ) {
                 if (parent.getChildAdapterPosition(view) != parent.adapter!!.itemCount) {
-                    outRect.set(0, 0, 30, 20)
+                    outRect.set(0, 0, 0, 30)
                 }
             }
         })

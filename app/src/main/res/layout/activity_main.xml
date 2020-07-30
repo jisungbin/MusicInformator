@@ -1,126 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg_gradient_main"
-    tools:context=".ui.activity.MainActivity"
-    tools:ignore="MissingConstraints">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <FrameLayout
-        android:id="@+id/fl_container"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_above="@id/bnv_navigation"
-        android:layout_marginBottom="@dimen/margin_half"
-        app:layout_constraintBottom_toTopOf="@+id/ll_playing_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
+        <variable
+            name="SongItem"
+            type="com.sungbin.musicinformator.model.SongItem" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/ll_playing_view"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@drawable/bg_top_round"
-        android:backgroundTint="@color/colorGray"
-        android:elevation="4dp"
-        android:paddingStart="@dimen/margin_default"
-        android:paddingTop="@dimen/margin_half"
-        android:paddingEnd="@dimen/margin_default"
-        android:paddingBottom="@dimen/margin_half"
-        app:layout_constraintBottom_toTopOf="@+id/bnv_navigation">
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_gradient_main"
+        tools:context=".ui.activity.MainActivity"
+        tools:ignore="MissingConstraints">
 
-        <com.sungbin.sungbintool.ui.TagableRoundImageView
-            android:id="@+id/triv_song_cover"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:contentDescription="@string/album_image"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:triv_imageRadius="@dimen/margin_half"
-            tools:src="@drawable/sample_album_image" />
+        <Space
+            android:id="@+id/space_margin"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_twice_and_half" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout4"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/margin_default"
-            android:layout_marginEnd="@dimen/margin_default"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toStartOf="@id/iv_music_favorite"
-            app:layout_constraintStart_toEndOf="@id/triv_song_cover">
-
-            <TextView
-                android:id="@+id/tv_song_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ellipsize="marquee"
-                android:marqueeRepeatLimit="marquee_forever"
-                android:singleLine="true"
-                android:text="@string/sample_song_name"
-                android:textColor="@color/colorWhite"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tv_song_artist"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_twice_half"
-                android:ellipsize="marquee"
-                android:marqueeRepeatLimit="marquee_forever"
-                android:singleLine="true"
-                android:text="@string/sample_song_artist"
-                android:textColor="@color/colorLightGray"
-                android:textSize="12sp"
-                tools:ignore="SmallSp" />
-
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/iv_music_action"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/music_action_button"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_baseline_play_arrow_24"
-            android:tint="@color/colorWhite"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <FrameLayout
+            android:id="@+id/fl_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_above="@id/bnv_navigation"
+            android:layout_marginBottom="@dimen/margin_half"
+            app:layout_constraintBottom_toTopOf="@+id/ll_playing_view"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/space_margin" />
 
-        <ImageView
-            android:id="@+id/iv_music_favorite"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="@dimen/margin_twice_half"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/music_action_button"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_baseline_favorite_border_24"
-            android:tint="@color/colorWhite"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ll_playing_view"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/bg_top_round"
+            android:backgroundTint="@color/colorGray"
+            android:elevation="4dp"
+            android:paddingStart="@dimen/margin_default"
+            android:paddingTop="@dimen/margin_half"
+            android:paddingEnd="@dimen/margin_default"
+            android:paddingBottom="@dimen/margin_half"
+            app:layout_constraintBottom_toTopOf="@+id/bnv_navigation">
+
+            <com.sungbin.sungbintool.ui.TagableRoundImageView
+                android:id="@+id/triv_song_cover"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/album_image"
+                app:imageUrl="@{SongItem.albumImageUrl}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:triv_imageRadius="@dimen/margin_half"
+                tools:src="@drawable/sample_album_image" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/margin_default"
+                android:layout_marginEnd="@dimen/margin_default"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toStartOf="@id/iv_music_favorite"
+                app:layout_constraintStart_toEndOf="@id/triv_song_cover">
+
+                <TextView
+                    android:id="@+id/tv_song_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:singleLine="true"
+                    android:text="@{SongItem.name}"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    tools:text="@string/sample_song_name"/>
+
+                <TextView
+                    android:id="@+id/tv_song_artist"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_twice_half"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:singleLine="true"
+                    android:text="@{SongItem.artist}"
+                    android:textColor="@color/colorLightGray"
+                    android:textSize="12sp"
+                    tools:text="@string/sample_song_artist"
+                    tools:ignore="SmallSp" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/iv_music_action"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/music_action_button"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_baseline_play_arrow_24"
+                android:tint="@color/colorWhite"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_music_favorite"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="@dimen/margin_twice_half"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/music_action_button"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_baseline_favorite_border_24"
+                android:tint="@color/colorWhite"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/iv_music_action"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bnv_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorGray"
+            app:backgroundTint="@color/colorGray"
+            app:itemIconTint="@color/colorWhite"
+            app:itemTextColor="@color/colorWhite"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/iv_music_action"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:menu="@menu/main_navigation" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bnv_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorGray"
-        app:backgroundTint="@color/colorGray"
-        app:itemIconTint="@color/colorWhite"
-        app:itemTextColor="@color/colorWhite"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/main_navigation" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

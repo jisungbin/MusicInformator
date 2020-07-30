@@ -5,16 +5,8 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.view.Gravity
 import android.view.LayoutInflater
-import android.view.ViewGroup
-import android.view.WindowManager
-import android.widget.LinearLayout
-import android.widget.ProgressBar
-import android.widget.TextView
-import androidx.core.content.ContextCompat
 import com.sungbin.musicinformator.R
-import org.jetbrains.anko.textColor
 
 class ProgressDialog constructor(val activity: Activity) {
 

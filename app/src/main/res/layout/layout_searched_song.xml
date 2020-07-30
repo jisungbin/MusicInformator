@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="SongItem"
+            type="com.sungbin.musicinformator.model.SongItem" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:background="@drawable/bg_gradient_main"
+        tools:context=".ui.activity.MainActivity"
+        tools:ignore="MissingConstraints,SmallSp"
+        tools:padding="@dimen/margin_default">
+
+        <com.sungbin.sungbintool.ui.TagableRoundImageView
+            android:id="@+id/triv_song_cover"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            app:imageUrl="@{SongItem.albumImageUrl}"
+            app:triv_imageRadius="@dimen/margin_half"
+            tools:src="@drawable/sample_album_image" />
+
+        <View
+            android:visibility="invisible"
+            android:id="@+id/view_line"
+            android:layout_width="0dp"
+            android:layout_height="0.1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/triv_song_cover"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@color/colorWhite"
+            tools:layout_height="2dp"/>
+
+        <TextView
+            android:id="@+id/tv_song_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_default"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:text="@{SongItem.name}"
+            android:textColor="@color/colorWhite"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/view_line"
+            app:layout_constraintEnd_toStartOf="@+id/iv_remove"
+            app:layout_constraintStart_toEndOf="@+id/triv_song_cover"
+            tools:text="@string/sample_song_name" />
+
+        <TextView
+            android:id="@+id/tv_song_artist"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_default"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:text="@{SongItem.artist}"
+            android:textColor="@color/colorLightGray"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/iv_remove"
+            app:layout_constraintStart_toEndOf="@+id/triv_song_cover"
+            app:layout_constraintTop_toBottomOf="@+id/view_line"
+            tools:text="@string/sample_song_artist" />
+
+        <ImageView
+            android:id="@+id/iv_remove"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:tint="@color/colorLightGray"
+            android:src="@drawable/ic_baseline_close_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/remove" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

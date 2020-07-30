@@ -2,23 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-            android:id="@+id/Main"
-            android:icon="@drawable/ic_baseline_home_24"
+            android:id="@+id/menu_main"
+            android:icon="@drawable/sdb_navigation_main"
             android:title="@string/main"/>
 
     <item
-            android:id="@+id/Search"
-            android:icon="@drawable/ic_outline_search_24"
+            android:id="@+id/menu_search"
+            android:icon="@drawable/sdb_navigation_search"
             android:title="@string/search"/>
 
     <item
-            android:id="@+id/Library"
-            android:icon="@drawable/ic_outline_library_music_24"
+            android:id="@+id/menu_library"
+            android:icon="@drawable/sdb_navigation_library"
             android:title="@string/library"/>
 
     <item
-            android:id="@+id/Setting"
-            android:icon="@drawable/ic_outline_settings_24"
+            android:id="@+id/menu_setting"
+            android:icon="@drawable/sdb_navigation_setting"
             android:title="@string/setting"/>
 
 </menu>

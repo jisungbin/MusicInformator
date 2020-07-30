@@ -6,15 +6,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/margin_default"
-    android:paddingBottom="@dimen/margin_default"
     tools:background="@drawable/bg_gradient_main"
     tools:ignore="MissingConstraints">
-
-    <Space
-        android:id="@+id/space_margin"
-        android:layout_width="match_parent"
-        android:layout_height="40dp" />
 
     <TextView
         android:paddingStart="@dimen/margin_default"
@@ -24,8 +17,7 @@
         android:layout_height="wrap_content"
         android:text="@string/recently_played"
         android:textColor="@color/colorWhite"
-        android:textSize="25sp"
-        app:layout_constraintTop_toBottomOf="@id/space_margin" />
+        android:textSize="25sp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_recently_played"
@@ -40,7 +32,7 @@
         android:clipToPadding="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@+id/tv_recently_played"
-        tools:listitem="@layout/layout_songs" />
+        tools:listitem="@layout/layout_song_item" />
 
     <TextView
         android:paddingStart="@dimen/margin_default"
@@ -68,6 +60,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_songs"
         app:spanCount="3"
-        tools:listitem="@layout/layout_songs" />
+        tools:listitem="@layout/layout_song_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

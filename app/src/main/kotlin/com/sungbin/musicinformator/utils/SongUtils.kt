@@ -12,6 +12,14 @@ import com.sungbin.musicinformator.model.SongItem
 object SongUtils {
     private val artworkUri = Uri.parse("content://media/external/audio/albumart")
 
+    fun getTestSongItem() = SongItem(
+        "Sexual",
+        "Neiked",
+        "https://musicmeta-phinf.pstatic.net/album/000/662/662857.jpg?type=r204Fll&v=20200218185711",
+        0L,
+        0L
+    )
+
     fun getAllAudioData(context: Context): ArrayList<SongItem> {
         val list = ArrayList<SongItem>()
         val contentResolver = context.contentResolver
@@ -31,8 +39,7 @@ object SongUtils {
                         it.getString(it.getColumnIndex(MediaStore.Audio.Media.ALBUM))
                     val artist =
                         it.getString(it.getColumnIndex(MediaStore.Audio.Media.ARTIST))
-                    val albumUri
-                        = getAlbumCoverUri(albumId).toString()
+                    val albumUri = getAlbumCoverUri(albumId).toString()
 
                     list.add(SongItem(title, artist, albumUri, trackId, albumId))
                 }
@@ -43,9 +50,7 @@ object SongUtils {
 
     fun getAlbumCoverUri(
         albumId: Long
-    ): Uri {
-        return ContentUris.withAppendedId(artworkUri, albumId)
-    }
+    ) = ContentUris.withAppendedId(artworkUri, albumId) as Uri
 
     fun getAlbumCoverBitmap(
         context: Context,

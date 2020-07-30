@@ -11,4 +11,7 @@
     <string name="music_action_button">Music Action Button</string>
     <string name="recently_played">최근 재생한 곡</string>
     <string name="song">노래</string>
+    <string name="search_hint">제목, 앨범명 또는 아티스트</string>
+    <string name="recently_search">최근 검색</string>
+    <string name="remove">remove</string>
 </resources>

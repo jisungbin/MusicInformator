@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 
 abstract class BaseFragment : Fragment() {
 
-    operator fun TextView.plusAssign(text:String){
+    operator fun TextView.plusAssign(text: String) {
         this.text = text
     }
 
