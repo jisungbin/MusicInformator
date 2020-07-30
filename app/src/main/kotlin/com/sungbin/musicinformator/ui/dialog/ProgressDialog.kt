@@ -14,7 +14,6 @@ class ProgressDialog constructor(val activity: Activity) {
 
     @SuppressLint("InflateParams")
     fun show() {
-
         val layout = LayoutInflater.from(activity).inflate(R.layout.layout_loading_dialog, null)
         val dialog = AlertDialog.Builder(activity)
         dialog.setView(layout)
