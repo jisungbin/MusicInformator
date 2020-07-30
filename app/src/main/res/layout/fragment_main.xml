@@ -46,20 +46,73 @@
         android:textSize="25sp"
         app:layout_constraintTop_toBottomOf="@+id/rv_recently_played" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_songs"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        tools:visibility="gone"
+        android:id="@+id/cl_empty_songs"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/margin_default"
-        android:overScrollMode="never"
-        android:scrollbars="none"
         android:paddingStart="@dimen/margin_default"
         android:paddingEnd="@dimen/margin_default"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_songs" >
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lav_songs_empty"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:layout_constraintBottom_toTopOf="@+id/view_line"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/empty_songs"
+            app:lottie_renderMode="hardware" />
+
+        <View
+            android:id="@+id/view_line"
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@color/colorWhite"
+            tools:layout_height="2dp" />
+
+        <TextView
+            android:id="@+id/tv_songs_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/songs_empty"
+            android:textColor="@color/colorWhite"
+            android:textSize="20sp"
+            android:layout_marginTop="@dimen/margin_default"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_line" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_songs"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_default"
         android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:paddingStart="@dimen/margin_default"
+        android:paddingEnd="@dimen/margin_default"
+        android:scrollbars="none"
+        android:visibility="invisible"
         app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_songs"
         app:spanCount="3"
-        tools:listitem="@layout/layout_song_item" />
+        tools:listitem="@layout/layout_song_item"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

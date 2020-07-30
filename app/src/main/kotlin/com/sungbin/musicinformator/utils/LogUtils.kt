@@ -1,6 +1,7 @@
 package com.sungbin.musicinformator.utils
 
 import android.util.Log
+import com.google.gson.JsonObject
 import org.json.JSONObject
 
 object LogUtils {

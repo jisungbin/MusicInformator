@@ -20,6 +20,9 @@
         app:layout_constraintStart_toStartOf="parent"/>
 
     <EditText
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textColor="@color/colorWhite"
         android:id="@+id/et_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

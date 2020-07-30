@@ -3,7 +3,8 @@ package com.sungbin.musicinformator.`interface`
 import com.google.gson.JsonObject
 import io.reactivex.rxjava3.core.Flowable
 import retrofit2.http.GET
-import retrofit2.http.Headers
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 
 /**
@@ -11,7 +12,12 @@ import retrofit2.http.Headers
  */
 
 interface GeniusInterface {
-    @Headers("Authorization: Bearer IbJtuUNSL2rYRk-ZdGkIqg9IKoyyE3KXrqOHF5FvfKlnr69jmlNwQ7u-7ydeYrjW")
     @GET("account")
     fun getAccountData(): Flowable<JsonObject>
+
+    @GET("songs/{id}")
+    fun getSongData(@Path("id") id: String): Flowable<JsonObject>
+
+    @GET("search")
+    fun getSearchData(@Query("q") id: String): Flowable<JsonObject>
 }

@@ -14,4 +14,5 @@
     <string name="search_hint">제목, 앨범명 또는 아티스트</string>
     <string name="recently_search">최근 검색</string>
     <string name="remove">remove</string>
+    <string name="songs_empty">저장된 노래가 없어요</string>
 </resources>

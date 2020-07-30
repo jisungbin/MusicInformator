@@ -2,6 +2,7 @@ package com.sungbin.musicinformator.ui.fragment.main
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.sungbin.musicinformator.R
@@ -38,7 +39,13 @@ class MainFragment : BaseFragment() {
 
         rv_recently_played.adapter =
             RecentlySongsAdapter(viewModel.recentlySongsItem.value ?: listOf(), activity)
-        rv_songs.adapter = RecentlySongsAdapter(viewModel.songsItem.value ?: listOf(), activity)
+
+        if (!viewModel.songsItem.value.isNullOrEmpty()) {
+            rv_songs.visibility = View.VISIBLE
+            cl_empty_songs.visibility = View.GONE
+            rv_songs.adapter = RecentlySongsAdapter(viewModel.songsItem.value ?: listOf(), activity)
+        }
+
     }
 
 }
