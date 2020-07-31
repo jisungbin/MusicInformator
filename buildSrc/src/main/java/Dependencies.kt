@@ -25,6 +25,8 @@ object Versions {
     const val Hilt = "2.28-alpha"
     const val HiltAndroidX = "1.0.0-alpha01"
 
+    const val Dagger = "2.28"
+
     const val Glide = "4.11.0"
     const val CardView = "1.0.0"
     const val ConstraintLayout = "1.1.3"
@@ -84,8 +86,10 @@ object Dependencies {
     }
 
     object Di {
+        const val Dagger = "com.google.dagger:dagger:${Versions.Dagger}"
         const val Hilt = "com.google.dagger:hilt-android:${Versions.Hilt}"
         const val HiltCommon = "androidx.hilt:hilt-common:${Versions.HiltAndroidX}"
+        const val DaggerCompiler = "com.google.dagger:dagger-compiler:${Versions.Dagger}"
         const val HiltAndroidXCompiler = "androidx.hilt:hilt-compiler:${Versions.HiltAndroidX}"
         const val HiltGoogleCompiler = "com.google.dagger:hilt-android-compiler:${Versions.Hilt}"
         const val HiltLifeCycle = "androidx.hilt:hilt-lifecycle-viewmodel:${Versions.HiltAndroidX}"

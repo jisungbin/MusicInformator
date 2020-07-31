@@ -1,15 +1,20 @@
 package com.sungbin.musicinformator.`interface`
 
 import com.google.gson.JsonObject
+import com.sungbin.musicinformator.module.GeniusClient
+import com.sungbin.musicinformator.paging.artist.ArtistDataSource
+import dagger.Component
 import io.reactivex.rxjava3.core.Flowable
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
+import javax.inject.Singleton
 
 
 /**
  * Created by SungBin on 2020-07-28.
  */
+
 
 interface GeniusInterface {
     @GET("account") //test task, api

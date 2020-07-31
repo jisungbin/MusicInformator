@@ -1,9 +1,10 @@
 package com.sungbin.musicinformator.paging.artist
 
+import android.annotation.SuppressLint
 import androidx.paging.PageKeyedDataSource
 import com.sungbin.musicinformator.`interface`.GeniusInterface
+import com.sungbin.musicinformator.di.DaggerGeniusComponent
 import com.sungbin.musicinformator.model.ArtistItem
-import com.sungbin.musicinformator.module.GeniusClient
 import com.sungbin.musicinformator.utils.LogUtils
 import com.sungbin.musicinformator.utils.ParseUtils
 import com.sungbin.musicinformator.utils.manager.TypeManager.ARTIST
@@ -13,6 +14,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import retrofit2.Retrofit
+import javax.inject.Inject
+import javax.inject.Named
 
 
 /**
@@ -27,8 +31,16 @@ class ArtistDataSource constructor(
     private val query: String
 ) : PageKeyedDataSource<Int, ArtistItem>() {
 
+    @Inject
+    @Named("BASE")
+    lateinit var client: Retrofit
+
+    init {
+        DaggerGeniusComponent.builder().build().inject(this)
+    }
+
     private fun client(callback: (List<ArtistItem>) -> Unit) {
-        GeniusClient.baseInstance()
+        client
             .create(GeniusInterface::class.java).run {
                 LogUtils.log("client - $page")
                 getSearchData(ARTIST, sortType, perPage, if (page <= 0) 1 else page, query)

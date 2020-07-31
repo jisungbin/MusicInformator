@@ -70,6 +70,7 @@ dependencies {
     implementation(Dependencies.Rx.Android)
 
     implementation(Dependencies.Di.Hilt)
+    implementation(Dependencies.Di.Dagger)
     implementation(Dependencies.Di.HiltCommon)
     implementation(Dependencies.Di.HiltLifeCycle)
 
@@ -90,6 +91,7 @@ dependencies {
     implementation(Dependencies.AndroidX.PagingRuntime)
 
     kapt(Dependencies.Ui.GlideCompiler)
+    kapt(Dependencies.Di.DaggerCompiler)
     kapt(Dependencies.AndroidX.RoomCompiler)
     kapt(Dependencies.Di.HiltGoogleCompiler)
     kapt(Dependencies.Di.HiltAndroidXCompiler)
