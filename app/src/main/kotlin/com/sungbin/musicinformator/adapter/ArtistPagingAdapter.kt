@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.NonNull
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -20,7 +21,7 @@ import com.sungbin.musicinformator.paging.artist.ArtistDiffUtilCallback
 
 class ArtistPagingAdapter : PagedListAdapter<ArtistItem, ArtistPagingAdapter.ViewHolder>(
     ArtistDiffUtilCallback()
-)  {
+) {
 
     class ViewHolder(private val artistItemBinding: LayoutArtistItemBinding) :
         RecyclerView.ViewHolder(artistItemBinding.root) {

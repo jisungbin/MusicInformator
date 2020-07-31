@@ -16,9 +16,9 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.sungbin.musicinformator.R
 import com.sungbin.musicinformator.`interface`.GeniusInterface
+import com.sungbin.musicinformator.adapter.ArtistPagingAdapter
 import com.sungbin.musicinformator.model.ArtistItem
 import com.sungbin.musicinformator.paging.artist.ArtistDataSource
-import com.sungbin.musicinformator.adapter.ArtistPagingAdapter
 import com.sungbin.musicinformator.ui.dialog.ProgressDialog
 import com.sungbin.musicinformator.ui.dialog.SearchOptionBottomDialog
 import com.sungbin.musicinformator.utils.LogUtils
@@ -149,9 +149,11 @@ class SearchFragment : Fragment() {
 
                                     val liveData = initializedPagedListBuilder(config).build()
 
-                                    liveData.observe(activity, Observer<PagedList<ArtistItem>> { pagedList ->
-                                        pagingAdapter.submitList(pagedList)
-                                    })
+                                    liveData.observe(
+                                        activity,
+                                        Observer<PagedList<ArtistItem>> { pagedList ->
+                                            pagingAdapter.submitList(pagedList)
+                                        })
 
                                     loadingDialog.close()
                                 })
@@ -168,7 +170,11 @@ class SearchFragment : Fragment() {
     private fun initializedPagedListBuilder(config: PagedList.Config): LivePagedListBuilder<Int, ArtistItem> {
         val dataSourceFactory = object : DataSource.Factory<Int, ArtistItem>() {
             override fun create(): DataSource<Int, ArtistItem> {
-                return ArtistDataSource(sortType, perPage, query = query)
+                return ArtistDataSource(
+                    sortType,
+                    perPage,
+                    query
+                )
             }
         }
         return LivePagedListBuilder<Int, ArtistItem>(dataSourceFactory, config)

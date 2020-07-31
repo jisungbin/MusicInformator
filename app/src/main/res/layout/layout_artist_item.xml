@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingConstraints">
 
     <data>
 
@@ -14,33 +15,76 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        tools:background="@drawable/bg_gradient_main"
-        tools:context=".ui.activity.MainActivity"
-        tools:padding="@dimen/margin_default">
+        android:orientation="vertical">
 
-        <com.sungbin.sungbintool.ui.TagableRoundImageView
-            android:id="@+id/triv_artist_cover"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            app:imageUrl="@{item.artistCoverUrl}"
-            app:triv_imageRadius="@dimen/margin_twice_and_half"
-            tools:src="@color/colorSky"/>
-
-        <TextView
-            android:layout_marginStart="@dimen/margin_twice"
-            android:id="@+id/tv_artist_name"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:ellipsize="marquee"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:singleLine="true"
-            android:text="@{item.name}"
-            android:textColor="@color/colorWhite"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:gravity="center_vertical"
-            tools:text="@string/sample_song_artist"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:background="@drawable/bg_gradient_main"
+            tools:context=".ui.activity.MainActivity"
+            tools:padding="@dimen/margin_default">
+
+            <com.sungbin.sungbintool.ui.TagableRoundImageView
+                android:id="@+id/triv_artist_cover"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                app:imageUrl="@{item.artistCoverUrl}"
+                app:triv_imageRadius="@dimen/margin_twice_and_half"
+                tools:src="@color/colorSky" />
+
+            <TextView
+                android:id="@+id/tv_artist_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/margin_twice"
+                android:ellipsize="marquee"
+                android:gravity="center_vertical"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"
+                android:text="@{item.name}"
+                android:textColor="@color/colorWhite"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                tools:text="@string/sample_song_artist" />
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:padding="@dimen/margin_default"
+            android:id="@+id/cl_loading"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:visibility="visible">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lav_loading"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="@dimen/margin_default"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_renderMode="hardware"
+                app:lottie_enableMergePathsForKitKatAndAbove="true"
+                app:lottie_rawRes="@raw/load_page"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_loading"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/loading"
+                android:textSize="20sp"
+                android:layout_marginStart="@dimen/margin_twice"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/lav_loading"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 

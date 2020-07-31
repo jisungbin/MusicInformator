@@ -37,5 +37,5 @@ object QueryUtils {
         }
 
     fun getPerPageQuery(context: Context) =
-        context.defaultSharedPreferences.getString(PER_PAGE, " 10").toString().toInt()
+        context.defaultSharedPreferences.getString(PER_PAGE, "10").toString().toInt()
 }

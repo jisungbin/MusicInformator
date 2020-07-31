@@ -1,12 +1,20 @@
 package com.sungbin.musicinformator.paging.artist
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
+import android.view.View
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.paging.PageKeyedDataSource
 import com.sungbin.musicinformator.`interface`.GeniusInterface
 import com.sungbin.musicinformator.di.DaggerGeniusComponent
 import com.sungbin.musicinformator.model.ArtistItem
+import com.sungbin.musicinformator.ui.dialog.ProgressDialog
+import com.sungbin.musicinformator.ui.fragment.search.SearchFragment
 import com.sungbin.musicinformator.utils.LogUtils
 import com.sungbin.musicinformator.utils.ParseUtils
+import com.sungbin.musicinformator.utils.extension.hide
+import com.sungbin.musicinformator.utils.extension.show
 import com.sungbin.musicinformator.utils.manager.TypeManager.ARTIST
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -18,18 +26,17 @@ import retrofit2.Retrofit
 import javax.inject.Inject
 import javax.inject.Named
 
-
 /**
  * Created by SungBin on 2020-08-01.
  */
 
-
 class ArtistDataSource constructor(
     private val sortType: String,
     private val perPage: Int,
-    private var page: Int = 1,
     private val query: String
 ) : PageKeyedDataSource<Int, ArtistItem>() {
+
+    var page = 1
 
     @Inject
     @Named("BASE")
@@ -42,7 +49,6 @@ class ArtistDataSource constructor(
     private fun client(callback: (List<ArtistItem>) -> Unit) {
         client
             .create(GeniusInterface::class.java).run {
-                LogUtils.log("client - $page")
                 getSearchData(ARTIST, sortType, perPage, if (page <= 0) 1 else page, query)
                     .subscribeOn(Schedulers.computation())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -56,7 +62,6 @@ class ArtistDataSource constructor(
                     }, { throwable ->
                         LogUtils.log(throwable)
                     }, {
-                        LogUtils.log("paging 데이터 로드 끝")
                     })
             }
     }
@@ -79,7 +84,6 @@ class ArtistDataSource constructor(
             page++
             client {
                 callback.onResult(it, page)
-                LogUtils.log("called after")
             }
         }
     }
