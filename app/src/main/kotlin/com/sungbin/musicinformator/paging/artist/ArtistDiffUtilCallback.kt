@@ -1,4 +1,4 @@
-package com.sungbin.musicinformator.paging
+package com.sungbin.musicinformator.paging.artist
 
 import androidx.recyclerview.widget.DiffUtil
 import com.sungbin.musicinformator.model.ArtistItem
@@ -9,14 +9,12 @@ import com.sungbin.musicinformator.model.ArtistItem
  */
 
 class ArtistDiffUtilCallback : DiffUtil.ItemCallback<ArtistItem>() {
-    override fun areItemsTheSame(oldItem: ArtistItem, newItem: ArtistItem): Boolean {
-        return oldItem.page == newItem.page
-    }
+    override fun areItemsTheSame(oldItem: ArtistItem, newItem: ArtistItem) =
+        oldItem.page == newItem.page
 
-    override fun areContentsTheSame(oldItem: ArtistItem, newItem: ArtistItem): Boolean {
-        return oldItem.name == newItem.name
+    override fun areContentsTheSame(oldItem: ArtistItem, newItem: ArtistItem) =
+        oldItem.name == newItem.name
                 && oldItem.artistCoverUrl == newItem.artistCoverUrl
                 && oldItem.artistHeaderUrl == newItem.artistHeaderUrl
                 && oldItem.artistId == newItem.artistId
-    }
 }

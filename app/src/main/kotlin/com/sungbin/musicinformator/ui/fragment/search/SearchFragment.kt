@@ -1,10 +1,13 @@
 package com.sungbin.musicinformator.ui.fragment.search
 
 import android.annotation.SuppressLint
+import android.app.Service
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
+import android.view.inputmethod.InputMethodManager.RESULT_UNCHANGED_SHOWN
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -14,8 +17,8 @@ import androidx.paging.PagedList
 import com.sungbin.musicinformator.R
 import com.sungbin.musicinformator.`interface`.GeniusInterface
 import com.sungbin.musicinformator.model.ArtistItem
-import com.sungbin.musicinformator.paging.ArtistDataSource
-import com.sungbin.musicinformator.paging.ArtistPagingAdapter
+import com.sungbin.musicinformator.paging.artist.ArtistDataSource
+import com.sungbin.musicinformator.adapter.ArtistPagingAdapter
 import com.sungbin.musicinformator.ui.dialog.ProgressDialog
 import com.sungbin.musicinformator.ui.dialog.SearchOptionBottomDialog
 import com.sungbin.musicinformator.utils.LogUtils
@@ -68,6 +71,15 @@ class SearchFragment : Fragment() {
         ArtistPagingAdapter()
     }
 
+    private val imm by lazy {
+        requireContext().getSystemService(Service.INPUT_METHOD_SERVICE) as InputMethodManager
+    }
+
+    private var perPage = 0
+    private var sortType = ""
+    private var searchType = ""
+    private var query = ""
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -84,25 +96,7 @@ class SearchFragment : Fragment() {
         if (viewModel.items.value.isNullOrEmpty())
             viewModel.initRecentlySongs()
 
-        /*viewModel.items.observe(viewLifecycleOwner, Observer {
-            rv_recently_searched.adapter = when (it[0]) {
-                is SongItem -> SongsAdapter(it ?: listOf(), activity)
-                is ArtistItem -> ArtistsAdapter(it ?: listOf(), activity)
-                else -> SongsAdapter(it ?: listOf(), activity)
-            }
-        })*/
-
         rv_recently_searched.adapter = pagingAdapter
-        val config = PagedList.Config.Builder()
-            .setPageSize(10)
-            .setEnablePlaceholders(false)
-            .build()
-
-        val liveData = initializedPagedListBuilder(config).build()
-
-        liveData.observe(activity, Observer<PagedList<ArtistItem>> { pagedList ->
-            pagingAdapter.submitList(pagedList)
-        })
 
         et_search.imeOptions = EditorInfo.IME_ACTION_SEARCH
         et_search.setEndDrawableClickEvent {
@@ -110,16 +104,17 @@ class SearchFragment : Fragment() {
             bottomSheetDialog.show(childFragmentManager, "검색 설정")
         }
         et_search.setOnEditorActionListener { _, actionId, _ ->
+            imm.hideSoftInputFromWindow(et_search.windowToken, RESULT_UNCHANGED_SHOWN)
             when (actionId) {
                 EditorInfo.IME_ACTION_SEARCH -> {
                     baseClient
                         .create(GeniusInterface::class.java).run {
                             loadingDialog.show()
 
-                            var perPage = 0
-                            var sortType = ""
-                            var searchType = ""
-                            val query = et_search.text.toString()
+                            perPage = 0
+                            sortType = ""
+                            searchType = ""
+                            query = et_search.text.toString()
 
                             context?.let {
                                 perPage = QueryUtils.getPerPageQuery(it)
@@ -147,6 +142,17 @@ class SearchFragment : Fragment() {
                                     loadingDialog.setError(throwable)
                                 }, {
                                     tv_searched_songs += getString(R.string.search_result)
+                                    val config = PagedList.Config.Builder()
+                                        .setPageSize(perPage)
+                                        .setEnablePlaceholders(true)
+                                        .build()
+
+                                    val liveData = initializedPagedListBuilder(config).build()
+
+                                    liveData.observe(activity, Observer<PagedList<ArtistItem>> { pagedList ->
+                                        pagingAdapter.submitList(pagedList)
+                                    })
+
                                     loadingDialog.close()
                                 })
                         }
@@ -159,12 +165,10 @@ class SearchFragment : Fragment() {
         }
     }
 
-    private fun initializedPagedListBuilder(config: PagedList.Config):
-            LivePagedListBuilder<Int, ArtistItem> {
-
+    private fun initializedPagedListBuilder(config: PagedList.Config): LivePagedListBuilder<Int, ArtistItem> {
         val dataSourceFactory = object : DataSource.Factory<Int, ArtistItem>() {
             override fun create(): DataSource<Int, ArtistItem> {
-                return ArtistDataSource()
+                return ArtistDataSource(sortType, perPage, query = query)
             }
         }
         return LivePagedListBuilder<Int, ArtistItem>(dataSourceFactory, config)
