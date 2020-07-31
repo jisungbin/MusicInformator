@@ -47,8 +47,6 @@ object Versions {
     const val RxJava = "3.0.4"
     const val RxKotlin = "3.0.0"
     const val RxAndroid = "3.0.0"
-
-    const val LoggingInterceptor = "4.8.0"
 }
 
 object Dependencies {
@@ -63,7 +61,6 @@ object Dependencies {
         const val Retrofit = "com.squareup.okhttp3:okhttp:${Versions.OkHttp}"
         const val OkHttp = "com.squareup.retrofit2:retrofit:${Versions.Retrofit}"
         const val RxRetrofit = "com.squareup.retrofit2:adapter-rxjava3:${Versions.RxRetrofit}"
-        const val LoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.LoggingInterceptor}"
     }
 
     object Rx {

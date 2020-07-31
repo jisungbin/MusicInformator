@@ -6,7 +6,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:padding="@dimen/margin_default"
-    android:background="@drawable/bg_round_radius"
+    android:background="@drawable/bg_round_all"
     android:backgroundTint="@color/colorWhite"
     tools:context=".ui.activity.MainActivity"
     tools:ignore="MissingConstraints,RtlSymmetry" >
@@ -20,6 +20,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
+        app:lottie_enableMergePathsForKitKatAndAbove="true"
         app:lottie_rawRes="@raw/load_songs"
         app:lottie_renderMode="hardware" />
 

@@ -1,10 +1,16 @@
 package com.sungbin.musicinformator.utils
 
+import android.annotation.SuppressLint
+import android.view.MotionEvent
 import android.view.View
+import android.widget.EditText
 import android.widget.TextView
+import androidx.annotation.IdRes
 import com.google.gson.JsonObject
 import com.sungbin.musicinformator.MusicInformator
+import com.sungbin.sungbintool.StringUtils
 import com.sungbin.sungbintool.ToastUtils
+import kotlinx.android.synthetic.main.fragment_search.*
 
 
 /**
@@ -31,4 +37,22 @@ fun TextView.clear() {
     this.text = ""
 }
 
+operator fun View.get(@IdRes id: Int) = this.findViewById<View>(id)!!
+
 fun JsonObject.getString(keyword: String) = this[keyword].toString().replace("\"", "")
+
+@SuppressLint("ClickableViewAccessibility")
+fun EditText.setEndDrawableClickEvent(action: (View) -> Unit){
+    this.setOnTouchListener(View.OnTouchListener { view, event ->
+        if (event.action == MotionEvent.ACTION_UP) {
+            if (event.rawX >= this.right - this.compoundDrawables[2].bounds.width()
+            ) {
+                action(view)
+                return@OnTouchListener true
+            }
+        }
+        false
+    })
+}
+
+fun String?.toEditable() = StringUtils.toEditable(this.toString())

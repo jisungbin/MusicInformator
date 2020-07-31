@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/margin_default"
+    android:background="@drawable/bg_round_top"
+    android:backgroundTint="@color/colorWhite"
+    tools:context=".ui.activity.MainActivity"
+    tools:ignore="MissingConstraints,RtlSymmetry"
+    android:baselineAligned="false">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/search_category"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiet_type"
+            android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_24"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="@dimen/margin_half"
+        android:id="@+id/til_sort"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/sort_type"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiet_sort"
+            android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_24"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="@dimen/margin_half"
+        android:id="@+id/til_per_page"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/per_page_result_count"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiet_per_page"
+            android:inputType="numberSigned"
+            android:layout_width="match_parent"
+            android:maxLength="2"
+            android:layout_height="wrap_content"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+</LinearLayout>

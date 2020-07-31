@@ -1,7 +1,6 @@
 package com.sungbin.musicinformator.utils
 
 import android.util.Log
-import com.google.gson.JsonObject
 import org.json.JSONObject
 
 object LogUtils {
@@ -12,7 +11,7 @@ object LogUtils {
         }
     }
 
-    fun json(string: String) {
-        Log.d("JSON", JSONObject(string).toString(4))
+    fun json(json: Any) {
+        Log.d("JSON", JSONObject(json.toString()).toString(4))
     }
 }

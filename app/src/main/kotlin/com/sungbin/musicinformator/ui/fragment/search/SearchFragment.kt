@@ -1,5 +1,6 @@
 package com.sungbin.musicinformator.ui.fragment.search
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -12,8 +13,8 @@ import com.sungbin.musicinformator.`interface`.GeniusInterface
 import com.sungbin.musicinformator.adapter.SearchedSongsAdapter
 import com.sungbin.musicinformator.model.SongItem
 import com.sungbin.musicinformator.ui.dialog.ProgressDialog
-import com.sungbin.musicinformator.utils.getString
-import com.sungbin.musicinformator.utils.plusAssign
+import com.sungbin.musicinformator.ui.dialog.SearchOptionBottomDialog
+import com.sungbin.musicinformator.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.WithFragmentBindings
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -21,6 +22,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_search.*
 import retrofit2.Retrofit
 import javax.inject.Inject
+import javax.inject.Named
 
 
 @AndroidEntryPoint
@@ -35,8 +37,13 @@ class SearchFragment : Fragment() {
         fun instance() = instance
     }
 
+    @Named("API")
     @Inject
-    lateinit var client: Retrofit
+    lateinit var apiClient: Retrofit
+
+    @Named("BASE")
+    @Inject
+    lateinit var baseClient: Retrofit
 
     private val loadingDialog: ProgressDialog by lazy {
         ProgressDialog(requireActivity())
@@ -49,6 +56,7 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ) = inflater.inflate(R.layout.fragment_search, container, false)!!
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -65,25 +73,47 @@ class SearchFragment : Fragment() {
         })
 
         et_search.imeOptions = EditorInfo.IME_ACTION_SEARCH
+        et_search.setEndDrawableClickEvent {
+            val bottomSheetDialog = SearchOptionBottomDialog.instance()
+            bottomSheetDialog.show(childFragmentManager, "검색 설정")
+        }
         et_search.setOnEditorActionListener { _, actionId, _ ->
             when (actionId) {
                 EditorInfo.IME_ACTION_SEARCH -> {
-                    client
+                    baseClient
                         .create(GeniusInterface::class.java).run {
                             loadingDialog.show()
-                            getSearchData(et_search.text.toString())
+
+                            var perPage = 0
+                            var sortType = ""
+                            var searchType = ""
+
+                            context?.let {
+                                perPage = QueryUtils.getPerPageQuery(it)
+                                sortType = QueryUtils.getSortTypeQuery(it)
+                                searchType = QueryUtils.getSearchTypeQuery(it)
+                            }
+
+                            val query = et_search.text.toString()
+
+                            getSearchData(searchType, sortType, perPage, 1, query)
                                 .subscribeOn(Schedulers.computation())
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribe({ jsonObject ->
+
                                     jsonObject?.let {
                                         val searchedSongs = arrayListOf<SongItem>()
                                         val jsonData =
-                                            it.getAsJsonObject("response").getAsJsonArray("hits")
+                                            it.getAsJsonObject("response")
+                                                .asJsonObject["sections"]
+                                                .asJsonArray[0]
+                                                .asJsonObject["hits"]
+                                                .asJsonArray
 
                                         for (element in jsonData) {
                                             element?.let { json ->
                                                 val resultJson =
-                                                    json.asJsonObject.getAsJsonObject("result")
+                                                    json.asJsonObject["result"].asJsonObject
                                                 val title =
                                                     resultJson.getString("title")
                                                 val artist =
@@ -105,6 +135,7 @@ class SearchFragment : Fragment() {
                                         viewModel.songsItem.value = searchedSongs
                                     }
                                 }, { throwable ->
+                                    LogUtils.log(throwable)
                                     loadingDialog.setError(throwable)
                                 }, {
                                     tv_searched_songs += getString(R.string.search_result)

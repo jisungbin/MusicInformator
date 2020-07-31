@@ -10,10 +10,10 @@ import com.sungbin.musicinformator.R
 import com.sungbin.musicinformator.databinding.ActivityMainBinding
 import com.sungbin.musicinformator.ui.fragment.main.MainFragment
 import com.sungbin.musicinformator.ui.fragment.search.SearchFragment
+import com.sungbin.musicinformator.utils.LogUtils
 import com.sungbin.musicinformator.utils.SongUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlin.random.Random
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         binding.invalidateAll()
 
         supportFragmentManager.commitNow {
-            add(R.id.fl_container, MainFragment.newInstance())
+            add(R.id.fl_container, MainFragment.instance())
         }
 
         ActivityCompat.requestPermissions(
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.menu_main -> {
                     supportFragmentManager.commitNow {
-                        replace(R.id.fl_container, MainFragment.newInstance())
+                        replace(R.id.fl_container, MainFragment.instance())
                     }
                 }
                 R.id.menu_search -> {

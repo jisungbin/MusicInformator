@@ -17,7 +17,7 @@ class MainFragment : Fragment() {
             MainFragment()
         }
 
-        fun newInstance() = instance
+        fun instance() = instance
     }
 
     private val viewModel by viewModels<MainViewModel>()

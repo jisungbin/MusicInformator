@@ -3,10 +3,10 @@ package com.sungbin.musicinformator.ui.dialog
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
-import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.text.Spannable
 import android.text.SpannableStringBuilder
+import android.text.method.ScrollingMovementMethod
 import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +14,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.airbnb.lottie.LottieAnimationView
 import com.sungbin.musicinformator.R
+import com.sungbin.musicinformator.utils.plusAssign
 
 
 class ProgressDialog constructor(val activity: Activity) {
@@ -28,8 +29,20 @@ class ProgressDialog constructor(val activity: Activity) {
         dialog.setView(layout)
 
         alert = dialog.create()
-        alert.window?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#00000000")))
+        alert.window?.setBackgroundDrawable(
+            ColorDrawable(
+                ContextCompat.getColor(
+                    layout.context,
+                    android.R.color.transparent
+                )
+            )
+        )
         alert.show()
+    }
+
+    fun updateTitle(title: String) {
+        layout.findViewById<TextView>(R.id.tv_loading) += title
+        layout.invalidate()
     }
 
     fun setError(throwable: Throwable) {
@@ -48,6 +61,7 @@ class ProgressDialog constructor(val activity: Activity) {
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
             )
             text = ssb
+            movementMethod = ScrollingMovementMethod()
         }
         layout.invalidate()
     }

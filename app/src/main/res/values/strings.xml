@@ -16,4 +16,7 @@
     <string name="remove">remove</string>
     <string name="songs_empty">저장된 노래가 없어요</string>
     <string name="search_result">검색 결과</string>
+    <string name="sort_type">정렬 방식</string>
+    <string name="per_page_result_count">페이지당 결과 개수</string>
+    <string name="search_category">검색 카테고리</string>
 </resources>

@@ -36,7 +36,7 @@
             android:id="@+id/ll_playing_view"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="@drawable/bg_top_round"
+            android:background="@drawable/bg_round_top"
             android:backgroundTint="@color/colorGray"
             android:elevation="4dp"
             android:paddingStart="@dimen/margin_default"
