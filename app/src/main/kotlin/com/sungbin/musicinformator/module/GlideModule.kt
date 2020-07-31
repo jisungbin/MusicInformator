@@ -1,4 +1,4 @@
-package com.sungbin.musicinformator
+package com.sungbin.musicinformator.module
 
 import android.content.Context
 import com.bumptech.glide.GlideBuilder

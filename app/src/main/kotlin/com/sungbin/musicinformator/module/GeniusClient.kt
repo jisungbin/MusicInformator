@@ -17,14 +17,11 @@ import javax.inject.Singleton
 object GeniusClient {
 
     private val okhttpClient: OkHttpClient get(){
-        val logger = HttpLoggingInterceptor()
-        logger.level = HttpLoggingInterceptor.Level.BASIC
-
         return OkHttpClient.Builder()
             .addInterceptor {
                 val request = it.request().newBuilder().addHeader(
                     "Authorization",
-                    "Bearer FuhUd_YEfku02ZyxH7QL1gN3q3hERKPK916sZT2ljmPg2I3KkETlaTvnOGQQxaTM"
+                    GeniusManager.TOKEN
                 ).build()
                 it.proceed(request)
             }

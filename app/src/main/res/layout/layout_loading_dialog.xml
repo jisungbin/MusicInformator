@@ -9,19 +9,23 @@
     android:background="@drawable/bg_round_radius"
     android:backgroundTint="@color/colorWhite"
     tools:context=".ui.activity.MainActivity"
-    tools:ignore="MissingConstraints" >
+    tools:ignore="MissingConstraints,RtlSymmetry" >
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lav_load"
         android:layout_width="75dp"
         android:layout_height="75dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/load_songs"
         app:lottie_renderMode="hardware" />
 
     <TextView
-        android:layout_marginStart="@dimen/margin_twice"
+        android:gravity="center"
+        android:paddingStart="@dimen/margin_twice"
         android:id="@+id/tv_loading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

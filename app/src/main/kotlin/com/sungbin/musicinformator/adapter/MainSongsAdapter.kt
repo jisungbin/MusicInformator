@@ -17,11 +17,11 @@ import com.sungbin.musicinformator.model.SongItem
  * Created by SungBin on 2020-07-20.
  */
 
-class RecentlySongsAdapter constructor
+class MainSongsAdapter constructor
     (
     val items: List<SongItem>,
     val activity: Activity
-) : RecyclerView.Adapter<RecentlySongsAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<MainSongsAdapter.ViewHolder>() {
 
     class ViewHolder(private val songItemBinding: LayoutSongItemBinding) :
         RecyclerView.ViewHolder(songItemBinding.root) {

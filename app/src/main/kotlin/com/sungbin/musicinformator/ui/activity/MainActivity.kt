@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.menu_library -> {
 
                 }
-                else -> {
+                else -> { //R.id.menu_setting
 
                 }
             }

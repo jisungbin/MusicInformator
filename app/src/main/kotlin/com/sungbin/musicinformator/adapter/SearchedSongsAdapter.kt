@@ -13,6 +13,7 @@ import com.sungbin.musicinformator.R
 import com.sungbin.musicinformator.databinding.LayoutSearchedSongBinding
 import com.sungbin.musicinformator.databinding.LayoutSongItemBinding
 import com.sungbin.musicinformator.model.SongItem
+import com.sungbin.musicinformator.utils.hide
 
 
 /**
@@ -30,6 +31,7 @@ class SearchedSongsAdapter constructor(
         fun bindViewHolder(item: SongItem) {
             songItemBinding.tvSongArtist.isSelected = true
             songItemBinding.tvSongName.isSelected = true
+            if (!item.isRecentlySearched) songItemBinding.ivRemove.hide()
             songItemBinding.songItem = item
         }
 

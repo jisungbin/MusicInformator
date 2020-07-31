@@ -2,9 +2,9 @@ package com.sungbin.musicinformator.ui.fragment.search
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.sungbin.musicinformator.R
@@ -12,21 +12,20 @@ import com.sungbin.musicinformator.`interface`.GeniusInterface
 import com.sungbin.musicinformator.adapter.SearchedSongsAdapter
 import com.sungbin.musicinformator.model.SongItem
 import com.sungbin.musicinformator.ui.dialog.ProgressDialog
-import com.sungbin.musicinformator.ui.fragment.BaseFragment
-import com.sungbin.musicinformator.utils.LogUtils
+import com.sungbin.musicinformator.utils.getString
+import com.sungbin.musicinformator.utils.plusAssign
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.WithFragmentBindings
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_search.*
-import kotlinx.android.synthetic.main.layout_searched_song.*
 import retrofit2.Retrofit
 import javax.inject.Inject
 
 
 @AndroidEntryPoint
 @WithFragmentBindings
-class SearchFragment : BaseFragment() {
+class SearchFragment : Fragment() {
 
     companion object {
         private val instance by lazy {
@@ -58,11 +57,9 @@ class SearchFragment : BaseFragment() {
         val activity = requireActivity()
 
         if (viewModel.songsItem.value.isNullOrEmpty())
-            viewModel.initSongs(activity)
-        if (viewModel.recentlySongsItem.value.isNullOrEmpty())
             viewModel.initRecentlySongs()
 
-        viewModel.recentlySongsItem.observe(viewLifecycleOwner, Observer {
+        viewModel.songsItem.observe(viewLifecycleOwner, Observer {
             rv_recently_searched.adapter =
                 SearchedSongsAdapter(it ?: listOf(), activity)
         })
@@ -88,30 +85,29 @@ class SearchFragment : BaseFragment() {
                                                 val resultJson =
                                                     json.asJsonObject.getAsJsonObject("result")
                                                 val title =
-                                                    resultJson["title"].toString().replace("\"", "")
+                                                    resultJson.getString("title")
                                                 val artist =
-                                                    resultJson.getAsJsonObject("primary_artist")["name"].toString()
-                                                        .replace("\"", "")
+                                                    resultJson.getAsJsonObject("primary_artist")
+                                                        .getString("name")
                                                 val albumUrl =
-                                                    resultJson["song_art_image_url"].toString()
-                                                        .replace("\"", "")
-                                                val songId = resultJson["id"].toString().toInt()
+                                                    resultJson.getString("song_art_image_url")
+                                                val songId = resultJson.getString("id").toInt()
                                                 val item = SongItem(
                                                     title,
                                                     artist,
                                                     albumUrl,
-                                                    songId = songId
+                                                    songId = songId,
+                                                    isRecentlySearched = false
                                                 )
                                                 searchedSongs.add(item)
                                             }
                                         }
-                                        viewModel.recentlySongsItem.value = searchedSongs
+                                        viewModel.songsItem.value = searchedSongs
                                     }
                                 }, { throwable ->
-                                    LogUtils.log(throwable)
+                                    loadingDialog.setError(throwable)
                                 }, {
-                                    tv_searched_songs.text = getString(R.string.search_result)
-                                    iv_remove.visibility = View.INVISIBLE
+                                    tv_searched_songs += getString(R.string.search_result)
                                     loadingDialog.close()
                                 })
                         }
