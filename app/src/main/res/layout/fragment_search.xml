@@ -71,7 +71,7 @@
         android:paddingEnd="@dimen/margin_default"
         android:clipToPadding="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/layout_searched_song"
+        tools:listitem="@layout/layout_song_item"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_searched_songs" />
 

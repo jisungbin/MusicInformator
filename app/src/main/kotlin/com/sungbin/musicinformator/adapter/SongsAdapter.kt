@@ -7,10 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.NonNull
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.sungbin.musicinformator.R
-import com.sungbin.musicinformator.databinding.LayoutSearchedSongBinding
 import com.sungbin.musicinformator.databinding.LayoutSongItemBinding
 import com.sungbin.musicinformator.model.SongItem
 import com.sungbin.musicinformator.utils.hide
@@ -20,19 +18,19 @@ import com.sungbin.musicinformator.utils.hide
  * Created by SungBin on 2020-07-20.
  */
 
-class SearchedSongsAdapter constructor(
-    val items: List<SongItem>,
+class SongsAdapter constructor(
+    val items: List<Any>,
     val activity: Activity
-) : RecyclerView.Adapter<SearchedSongsAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<SongsAdapter.ViewHolder>() {
 
-    class ViewHolder(private val songItemBinding: LayoutSearchedSongBinding) :
+    class ViewHolder(private val songItemBinding: LayoutSongItemBinding) :
         RecyclerView.ViewHolder(songItemBinding.root) {
 
         fun bindViewHolder(item: SongItem) {
             songItemBinding.tvSongArtist.isSelected = true
             songItemBinding.tvSongName.isSelected = true
             if (!item.isRecentlySearched) songItemBinding.ivRemove.hide()
-            songItemBinding.songItem = item
+            songItemBinding.item = item
         }
 
     }
@@ -41,12 +39,12 @@ class SearchedSongsAdapter constructor(
         ViewHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(activity),
-                R.layout.layout_searched_song, viewGroup, false
+                R.layout.layout_song_item, viewGroup, false
             )
         )
 
     override fun onBindViewHolder(@NonNull viewholder: ViewHolder, position: Int) {
-        viewholder.bindViewHolder(items[position])
+        viewholder.bindViewHolder(items[position] as SongItem)
     }
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {

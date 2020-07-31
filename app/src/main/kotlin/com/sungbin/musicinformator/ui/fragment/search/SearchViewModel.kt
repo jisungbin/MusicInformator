@@ -7,10 +7,10 @@ import com.sungbin.musicinformator.utils.SongUtils
 
 class SearchViewModel : ViewModel() {
 
-    val songsItem: MutableLiveData<List<SongItem>> = MutableLiveData()
+    val items: MutableLiveData<List<Any>> = MutableLiveData()
 
     fun initRecentlySongs() {
-        songsItem.value = SongUtils.sampleSongItemList
+        items.value = SongUtils.sampleSongItemList
     }
 
 }

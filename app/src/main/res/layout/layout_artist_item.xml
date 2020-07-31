@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.sungbin.musicinformator.model.ArtistItem" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:background="@drawable/bg_gradient_main"
+        tools:context=".ui.activity.MainActivity"
+        tools:padding="@dimen/margin_default">
+
+        <com.sungbin.sungbintool.ui.TagableRoundImageView
+            android:id="@+id/triv_artist_cover"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            app:imageUrl="@{item.artistCoverUrl}"
+            app:triv_imageRadius="@dimen/margin_twice_and_half"
+            tools:src="@color/colorSky"/>
+
+        <TextView
+            android:layout_marginStart="@dimen/margin_twice"
+            android:id="@+id/tv_artist_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:text="@{item.name}"
+            android:textColor="@color/colorWhite"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:gravity="center_vertical"
+            tools:text="@string/sample_song_artist"/>
+
+    </LinearLayout>
+
+</layout>

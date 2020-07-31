@@ -9,27 +9,28 @@ import androidx.annotation.NonNull
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.sungbin.musicinformator.R
-import com.sungbin.musicinformator.databinding.LayoutMainSongItemBinding
+import com.sungbin.musicinformator.databinding.LayoutArtistItemBinding
+import com.sungbin.musicinformator.databinding.LayoutSongItemBinding
+import com.sungbin.musicinformator.model.ArtistItem
 import com.sungbin.musicinformator.model.SongItem
+import com.sungbin.musicinformator.utils.hide
 
 
 /**
- * Created by SungBin on 2020-07-20.
+ * Created by SungBin on 2020-08-01.
  */
 
-class MainSongsAdapter constructor
-    (
-    val items: List<SongItem>,
+class ArtistsAdapter constructor(
+    val items: List<Any>,
     val activity: Activity
-) : RecyclerView.Adapter<MainSongsAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<ArtistsAdapter.ViewHolder>() {
 
-    class ViewHolder(private val songItemBinding: LayoutMainSongItemBinding) :
-        RecyclerView.ViewHolder(songItemBinding.root) {
+    class ViewHolder(private val artistItemBinding: LayoutArtistItemBinding) :
+        RecyclerView.ViewHolder(artistItemBinding.root) {
 
-        fun bindViewHolder(item: SongItem) {
-            songItemBinding.tvSongArtist.isSelected = true
-            songItemBinding.tvSongName.isSelected = true
-            songItemBinding.item = item
+        fun bindViewHolder(item: ArtistItem) {
+            artistItemBinding.tvArtistName.isSelected = true
+            artistItemBinding.item = item
         }
 
     }
@@ -38,12 +39,12 @@ class MainSongsAdapter constructor
         ViewHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(activity),
-                R.layout.layout_main_song_item, viewGroup, false
+                R.layout.layout_artist_item, viewGroup, false
             )
         )
 
     override fun onBindViewHolder(@NonNull viewholder: ViewHolder, position: Int) {
-        viewholder.bindViewHolder(items[position])
+        viewholder.bindViewHolder(items[position] as ArtistItem)
     }
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
@@ -55,7 +56,7 @@ class MainSongsAdapter constructor
                 state: RecyclerView.State
             ) {
                 if (parent.getChildAdapterPosition(view) != parent.adapter!!.itemCount) {
-                    outRect.set(0, 0, 30, 20)
+                    outRect.set(0, 0, 0, 30)
                 }
             }
         })

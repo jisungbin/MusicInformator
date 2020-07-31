@@ -10,7 +10,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.sungbin.musicinformator.R
 import com.sungbin.musicinformator.`interface`.GeniusInterface
-import com.sungbin.musicinformator.adapter.SearchedSongsAdapter
+import com.sungbin.musicinformator.adapter.ArtistsAdapter
+import com.sungbin.musicinformator.adapter.SongsAdapter
+import com.sungbin.musicinformator.model.ArtistItem
 import com.sungbin.musicinformator.model.SongItem
 import com.sungbin.musicinformator.ui.dialog.ProgressDialog
 import com.sungbin.musicinformator.ui.dialog.SearchOptionBottomDialog
@@ -20,6 +22,7 @@ import dagger.hilt.android.WithFragmentBindings
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_search.*
+import kotlinx.coroutines.*
 import retrofit2.Retrofit
 import javax.inject.Inject
 import javax.inject.Named
@@ -64,12 +67,15 @@ class SearchFragment : Fragment() {
 
         val activity = requireActivity()
 
-        if (viewModel.songsItem.value.isNullOrEmpty())
+        if (viewModel.items.value.isNullOrEmpty())
             viewModel.initRecentlySongs()
 
-        viewModel.songsItem.observe(viewLifecycleOwner, Observer {
-            rv_recently_searched.adapter =
-                SearchedSongsAdapter(it ?: listOf(), activity)
+        viewModel.items.observe(viewLifecycleOwner, Observer {
+            rv_recently_searched.adapter = when (it[0]) {
+                is SongItem -> SongsAdapter(it ?: listOf(), activity)
+                is ArtistItem -> ArtistsAdapter(it ?: listOf(), activity)
+                else -> SongsAdapter(it ?: listOf(), activity)
+            }
         })
 
         et_search.imeOptions = EditorInfo.IME_ACTION_SEARCH
@@ -87,6 +93,7 @@ class SearchFragment : Fragment() {
                             var perPage = 0
                             var sortType = ""
                             var searchType = ""
+                            val query = et_search.text.toString()
 
                             context?.let {
                                 perPage = QueryUtils.getPerPageQuery(it)
@@ -94,45 +101,20 @@ class SearchFragment : Fragment() {
                                 searchType = QueryUtils.getSearchTypeQuery(it)
                             }
 
-                            val query = et_search.text.toString()
-
                             getSearchData(searchType, sortType, perPage, 1, query)
                                 .subscribeOn(Schedulers.computation())
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribe({ jsonObject ->
-
-                                    jsonObject?.let {
-                                        val searchedSongs = arrayListOf<SongItem>()
-                                        val jsonData =
-                                            it.getAsJsonObject("response")
-                                                .asJsonObject["sections"]
-                                                .asJsonArray[0]
-                                                .asJsonObject["hits"]
-                                                .asJsonArray
-
-                                        for (element in jsonData) {
-                                            element?.let { json ->
-                                                val resultJson =
-                                                    json.asJsonObject["result"].asJsonObject
-                                                val title =
-                                                    resultJson.getString("title")
-                                                val artist =
-                                                    resultJson.getAsJsonObject("primary_artist")
-                                                        .getString("name")
-                                                val albumUrl =
-                                                    resultJson.getString("song_art_image_url")
-                                                val songId = resultJson.getString("id").toInt()
-                                                val item = SongItem(
-                                                    title,
-                                                    artist,
-                                                    albumUrl,
-                                                    songId = songId,
-                                                    isRecentlySearched = false
-                                                )
-                                                searchedSongs.add(item)
-                                            }
+                                    CoroutineScope(Dispatchers.Main).launch {
+                                        viewModel.items.value = when (searchType) {
+                                            TypeManager.SONG -> async {
+                                                ParseUtils.getSongSearchData(jsonObject)
+                                            }.await()
+                                            TypeManager.ARTIST -> async {
+                                                ParseUtils.getArtistSearchData(jsonObject)
+                                            }.await()
+                                            else -> arrayListOf()
                                         }
-                                        viewModel.songsItem.value = searchedSongs
                                     }
                                 }, { throwable ->
                                     LogUtils.log(throwable)
