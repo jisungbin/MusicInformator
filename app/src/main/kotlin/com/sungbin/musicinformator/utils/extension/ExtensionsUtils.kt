@@ -1,4 +1,4 @@
-package com.sungbin.musicinformator.utils
+package com.sungbin.musicinformator.utils.extension
 
 import android.annotation.SuppressLint
 import android.view.MotionEvent
@@ -10,7 +10,6 @@ import com.google.gson.JsonObject
 import com.sungbin.musicinformator.MusicInformator
 import com.sungbin.sungbintool.StringUtils
 import com.sungbin.sungbintool.ToastUtils
-import kotlinx.android.synthetic.main.fragment_search.*
 
 
 /**

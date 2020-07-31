@@ -1,12 +1,12 @@
-package com.sungbin.musicinformator.adapter
+package com.sungbin.musicinformator.paging
 
-import android.app.Activity
 import android.graphics.Rect
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.NonNull
 import androidx.databinding.DataBindingUtil
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sungbin.musicinformator.R
 import com.sungbin.musicinformator.databinding.LayoutArtistItemBinding
@@ -17,10 +17,7 @@ import com.sungbin.musicinformator.model.ArtistItem
  * Created by SungBin on 2020-08-01.
  */
 
-class ArtistsAdapter constructor(
-    val items: List<Any>,
-    val activity: Activity
-) : RecyclerView.Adapter<ArtistsAdapter.ViewHolder>() {
+class ArtistPagingAdapter : PagedListAdapter<ArtistItem, ArtistPagingAdapter.ViewHolder>(ArtistDiffUtilCallback())  {
 
     class ViewHolder(private val artistItemBinding: LayoutArtistItemBinding) :
         RecyclerView.ViewHolder(artistItemBinding.root) {
@@ -35,13 +32,15 @@ class ArtistsAdapter constructor(
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int) =
         ViewHolder(
             DataBindingUtil.inflate(
-                LayoutInflater.from(activity),
+                LayoutInflater.from(viewGroup.context),
                 R.layout.layout_artist_item, viewGroup, false
             )
         )
 
     override fun onBindViewHolder(@NonNull viewholder: ViewHolder, position: Int) {
-        viewholder.bindViewHolder(items[position] as ArtistItem)
+        getItem(position)?.let {
+            viewholder.bindViewHolder(it)
+        }
     }
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
@@ -59,7 +58,6 @@ class ArtistsAdapter constructor(
         })
     }
 
-    override fun getItemCount() = items.size
     override fun getItemId(position: Int) = position.toLong()
     override fun getItemViewType(position: Int) = position
 }

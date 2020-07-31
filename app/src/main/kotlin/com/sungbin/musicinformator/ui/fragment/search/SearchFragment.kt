@@ -8,21 +8,31 @@ import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.paging.DataSource
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import com.sungbin.musicinformator.R
 import com.sungbin.musicinformator.`interface`.GeniusInterface
-import com.sungbin.musicinformator.adapter.ArtistsAdapter
-import com.sungbin.musicinformator.adapter.SongsAdapter
 import com.sungbin.musicinformator.model.ArtistItem
-import com.sungbin.musicinformator.model.SongItem
+import com.sungbin.musicinformator.paging.ArtistDataSource
+import com.sungbin.musicinformator.paging.ArtistPagingAdapter
 import com.sungbin.musicinformator.ui.dialog.ProgressDialog
 import com.sungbin.musicinformator.ui.dialog.SearchOptionBottomDialog
-import com.sungbin.musicinformator.utils.*
+import com.sungbin.musicinformator.utils.LogUtils
+import com.sungbin.musicinformator.utils.ParseUtils
+import com.sungbin.musicinformator.utils.QueryUtils
+import com.sungbin.musicinformator.utils.extension.plusAssign
+import com.sungbin.musicinformator.utils.extension.setEndDrawableClickEvent
+import com.sungbin.musicinformator.utils.manager.TypeManager
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.WithFragmentBindings
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_search.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import javax.inject.Inject
 import javax.inject.Named
@@ -54,6 +64,10 @@ class SearchFragment : Fragment() {
 
     private val viewModel by viewModels<SearchViewModel>()
 
+    private val pagingAdapter by lazy {
+        ArtistPagingAdapter()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -70,12 +84,24 @@ class SearchFragment : Fragment() {
         if (viewModel.items.value.isNullOrEmpty())
             viewModel.initRecentlySongs()
 
-        viewModel.items.observe(viewLifecycleOwner, Observer {
+        /*viewModel.items.observe(viewLifecycleOwner, Observer {
             rv_recently_searched.adapter = when (it[0]) {
                 is SongItem -> SongsAdapter(it ?: listOf(), activity)
                 is ArtistItem -> ArtistsAdapter(it ?: listOf(), activity)
                 else -> SongsAdapter(it ?: listOf(), activity)
             }
+        })*/
+
+        rv_recently_searched.adapter = pagingAdapter
+        val config = PagedList.Config.Builder()
+            .setPageSize(10)
+            .setEnablePlaceholders(false)
+            .build()
+
+        val liveData = initializedPagedListBuilder(config).build()
+
+        liveData.observe(activity, Observer<PagedList<ArtistItem>> { pagedList ->
+            pagingAdapter.submitList(pagedList)
         })
 
         et_search.imeOptions = EditorInfo.IME_ACTION_SEARCH
@@ -131,6 +157,17 @@ class SearchFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun initializedPagedListBuilder(config: PagedList.Config):
+            LivePagedListBuilder<Int, ArtistItem> {
+
+        val dataSourceFactory = object : DataSource.Factory<Int, ArtistItem>() {
+            override fun create(): DataSource<Int, ArtistItem> {
+                return ArtistDataSource()
+            }
+        }
+        return LivePagedListBuilder<Int, ArtistItem>(dataSourceFactory, config)
     }
 
 }

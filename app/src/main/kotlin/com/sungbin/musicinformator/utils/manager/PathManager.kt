@@ -1,4 +1,4 @@
-package com.sungbin.musicinformator.utils
+package com.sungbin.musicinformator.utils.manager
 
 
 /**

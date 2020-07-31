@@ -3,6 +3,7 @@ package com.sungbin.musicinformator.utils
 import com.google.gson.JsonObject
 import com.sungbin.musicinformator.model.ArtistItem
 import com.sungbin.musicinformator.model.SongItem
+import com.sungbin.musicinformator.utils.extension.getString
 
 object ParseUtils {
 

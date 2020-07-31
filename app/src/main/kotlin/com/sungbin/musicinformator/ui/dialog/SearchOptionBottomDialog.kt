@@ -10,16 +10,18 @@ import androidx.core.content.edit
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputEditText
 import com.sungbin.musicinformator.R
-import com.sungbin.musicinformator.utils.*
-import com.sungbin.musicinformator.utils.PathManager.PER_PAGE
-import com.sungbin.musicinformator.utils.PathManager.SEARCH_SORT_TYPE
-import com.sungbin.musicinformator.utils.PathManager.SEARCH_TYPE
-import com.sungbin.musicinformator.utils.TypeManager.ALBUM_SEARCH
-import com.sungbin.musicinformator.utils.TypeManager.ARTIST_SEARCH
-import com.sungbin.musicinformator.utils.TypeManager.LYRIC_SEARCH
-import com.sungbin.musicinformator.utils.TypeManager.POPULARITY_SORT
-import com.sungbin.musicinformator.utils.TypeManager.SONG_SEARCH
-import com.sungbin.musicinformator.utils.TypeManager.TITLE_SORT
+import com.sungbin.musicinformator.utils.extension.get
+import com.sungbin.musicinformator.utils.extension.setEndDrawableClickEvent
+import com.sungbin.musicinformator.utils.extension.toEditable
+import com.sungbin.musicinformator.utils.manager.PathManager.PER_PAGE
+import com.sungbin.musicinformator.utils.manager.PathManager.SEARCH_SORT_TYPE
+import com.sungbin.musicinformator.utils.manager.PathManager.SEARCH_TYPE
+import com.sungbin.musicinformator.utils.manager.TypeManager.ALBUM_SEARCH
+import com.sungbin.musicinformator.utils.manager.TypeManager.ARTIST_SEARCH
+import com.sungbin.musicinformator.utils.manager.TypeManager.LYRIC_SEARCH
+import com.sungbin.musicinformator.utils.manager.TypeManager.POPULARITY_SORT
+import com.sungbin.musicinformator.utils.manager.TypeManager.SONG_SEARCH
+import com.sungbin.musicinformator.utils.manager.TypeManager.TITLE_SORT
 import org.jetbrains.anko.support.v4.defaultSharedPreferences
 
 class SearchOptionBottomDialog : BottomSheetDialogFragment() {

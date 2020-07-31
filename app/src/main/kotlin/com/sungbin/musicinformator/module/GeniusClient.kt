@@ -1,11 +1,12 @@
 package com.sungbin.musicinformator.module
 
-import com.sungbin.musicinformator.utils.GeniusManager
+import com.sungbin.musicinformator.utils.manager.GeniusManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -15,6 +16,10 @@ import javax.inject.Singleton
 @Module
 @InstallIn(ApplicationComponent::class)
 object GeniusClient {
+
+    private val logging = HttpLoggingInterceptor().apply {
+        level = HttpLoggingInterceptor.Level.BODY
+    }
 
     private val okhttpClient: OkHttpClient
         get() {
@@ -26,6 +31,7 @@ object GeniusClient {
                     ).build()
                     it.proceed(request)
                 }
+                .addInterceptor(logging)
                 .build()
         }
 

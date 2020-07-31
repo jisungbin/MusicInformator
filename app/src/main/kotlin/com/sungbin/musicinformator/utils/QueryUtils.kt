@@ -1,21 +1,21 @@
 package com.sungbin.musicinformator.utils
 
 import android.content.Context
-import com.sungbin.musicinformator.utils.PathManager.PER_PAGE
-import com.sungbin.musicinformator.utils.PathManager.SEARCH_SORT_TYPE
-import com.sungbin.musicinformator.utils.PathManager.SEARCH_TYPE
-import com.sungbin.musicinformator.utils.TypeManager.ALBUM
-import com.sungbin.musicinformator.utils.TypeManager.ALBUM_SEARCH
-import com.sungbin.musicinformator.utils.TypeManager.ARTIST
-import com.sungbin.musicinformator.utils.TypeManager.ARTIST_SEARCH
-import com.sungbin.musicinformator.utils.TypeManager.LYRIC
-import com.sungbin.musicinformator.utils.TypeManager.LYRIC_SEARCH
-import com.sungbin.musicinformator.utils.TypeManager.POPULARITY
-import com.sungbin.musicinformator.utils.TypeManager.POPULARITY_SORT
-import com.sungbin.musicinformator.utils.TypeManager.SONG
-import com.sungbin.musicinformator.utils.TypeManager.SONG_SEARCH
-import com.sungbin.musicinformator.utils.TypeManager.TITLE
-import com.sungbin.musicinformator.utils.TypeManager.TITLE_SORT
+import com.sungbin.musicinformator.utils.manager.PathManager.PER_PAGE
+import com.sungbin.musicinformator.utils.manager.PathManager.SEARCH_SORT_TYPE
+import com.sungbin.musicinformator.utils.manager.PathManager.SEARCH_TYPE
+import com.sungbin.musicinformator.utils.manager.TypeManager.ALBUM
+import com.sungbin.musicinformator.utils.manager.TypeManager.ALBUM_SEARCH
+import com.sungbin.musicinformator.utils.manager.TypeManager.ARTIST
+import com.sungbin.musicinformator.utils.manager.TypeManager.ARTIST_SEARCH
+import com.sungbin.musicinformator.utils.manager.TypeManager.LYRIC
+import com.sungbin.musicinformator.utils.manager.TypeManager.LYRIC_SEARCH
+import com.sungbin.musicinformator.utils.manager.TypeManager.POPULARITY
+import com.sungbin.musicinformator.utils.manager.TypeManager.POPULARITY_SORT
+import com.sungbin.musicinformator.utils.manager.TypeManager.SONG
+import com.sungbin.musicinformator.utils.manager.TypeManager.SONG_SEARCH
+import com.sungbin.musicinformator.utils.manager.TypeManager.TITLE
+import com.sungbin.musicinformator.utils.manager.TypeManager.TITLE_SORT
 import org.jetbrains.anko.defaultSharedPreferences
 
 object QueryUtils {

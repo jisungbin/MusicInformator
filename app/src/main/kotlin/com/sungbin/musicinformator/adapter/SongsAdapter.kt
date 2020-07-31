@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sungbin.musicinformator.R
 import com.sungbin.musicinformator.databinding.LayoutSongItemBinding
 import com.sungbin.musicinformator.model.SongItem
-import com.sungbin.musicinformator.utils.hide
+import com.sungbin.musicinformator.utils.extension.hide
 
 
 /**
@@ -65,5 +65,4 @@ class SongsAdapter constructor(
     override fun getItemCount() = items.size
     override fun getItemId(position: Int) = position.toLong()
     override fun getItemViewType(position: Int) = position
-    fun getItem(position: Int) = items[position]
 }

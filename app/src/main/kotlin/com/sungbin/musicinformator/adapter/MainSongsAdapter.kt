@@ -64,5 +64,4 @@ class MainSongsAdapter constructor
     override fun getItemCount() = items.size
     override fun getItemId(position: Int) = position.toLong()
     override fun getItemViewType(position: Int) = position
-    fun getItem(position: Int) = items[position]
 }

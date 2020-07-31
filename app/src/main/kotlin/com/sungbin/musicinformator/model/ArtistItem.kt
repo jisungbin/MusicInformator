@@ -14,7 +14,8 @@ data class ArtistItem(
     var name: String,
     var artistCoverUrl: String,
     var artistHeaderUrl: String,
-    var artistId: Int
+    var artistId: Int,
+    var page: Int = 1
 ) {
     companion object {
         @JvmStatic
