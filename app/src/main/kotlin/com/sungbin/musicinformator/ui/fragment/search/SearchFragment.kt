@@ -19,6 +19,7 @@ import com.sungbin.musicinformator.`interface`.GeniusInterface
 import com.sungbin.musicinformator.adapter.ArtistPagingAdapter
 import com.sungbin.musicinformator.model.ArtistItem
 import com.sungbin.musicinformator.paging.artist.ArtistDataSource
+import com.sungbin.musicinformator.room.ArtistDatabase
 import com.sungbin.musicinformator.ui.dialog.ProgressDialog
 import com.sungbin.musicinformator.ui.dialog.SearchOptionBottomDialog
 import com.sungbin.musicinformator.utils.LogUtils
@@ -173,7 +174,8 @@ class SearchFragment : Fragment() {
                 return ArtistDataSource(
                     sortType,
                     perPage,
-                    query
+                    query,
+                    ArtistDatabase.getInstance(context!!)!!
                 )
             }
         }

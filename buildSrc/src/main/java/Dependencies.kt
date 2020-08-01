@@ -39,7 +39,7 @@ object Versions {
     const val AnimatorTool = "2.1@aar"
     const val AnimatorYOYO = "2.3@aar"
 
-    const val Room = "2.1.0-alpha06"
+    const val Room = "2.3.0-alpha02"
     const val Paging = "2.1.0-beta01"
 
     const val OkHttp = "4.8.0"
@@ -55,6 +55,7 @@ object Versions {
 
 object Dependencies {
     object AndroidX {
+        const val RoomRx = "androidx.room:room-rxjava2:${Versions.Room}"
         const val RoomRuntime = "androidx.room:room-runtime:${Versions.Room}"
         const val RoomCompiler = "androidx.room:room-compiler:${Versions.Room}"
         const val PagingRx = "androidx.paging:paging-rxjava2:${Versions.Paging}"

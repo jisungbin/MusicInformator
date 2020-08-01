@@ -86,6 +86,7 @@ dependencies {
     implementation(Dependencies.Animator.Yoyo)
     implementation(Dependencies.Animator.Lottie)
 
+    implementation(Dependencies.AndroidX.RoomRx)
     implementation(Dependencies.AndroidX.PagingRx)
     implementation(Dependencies.AndroidX.RoomRuntime)
     implementation(Dependencies.AndroidX.PagingRuntime)
