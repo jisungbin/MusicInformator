@@ -1,21 +1,13 @@
 package com.sungbin.musicinformator.paging.artist
 
-import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Context
-import android.view.View
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.paging.PageKeyedDataSource
 import com.sungbin.musicinformator.`interface`.GeniusInterface
 import com.sungbin.musicinformator.di.DaggerGeniusComponent
 import com.sungbin.musicinformator.model.ArtistItem
-import com.sungbin.musicinformator.room.ArtistDatabase
-import com.sungbin.musicinformator.ui.dialog.ProgressDialog
-import com.sungbin.musicinformator.ui.fragment.search.SearchFragment
+import com.sungbin.musicinformator.database.ArtistDatabase
 import com.sungbin.musicinformator.utils.LogUtils
 import com.sungbin.musicinformator.utils.ParseUtils
-import com.sungbin.musicinformator.utils.extension.hide
-import com.sungbin.musicinformator.utils.extension.show
+import com.sungbin.musicinformator.utils.extension.toast
 import com.sungbin.musicinformator.utils.manager.TypeManager.ARTIST
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -46,10 +38,9 @@ class ArtistDataSource constructor(
     }
 
     private fun client(callback: (List<ArtistItem>) -> Unit) {
+        LogUtils.log(ARTIST, sortType, perPage, if (page <= 0) 1 else page, query)
         artistDatabase.artistDao().let {
-            LogUtils.log("room called")
-
-            if (it.getAll().isEmpty()) {
+            if (it.getItem(page).isEmpty()) {
                 client
                     .create(GeniusInterface::class.java).run {
                         getSearchData(ARTIST, sortType, perPage, if (page <= 0) 1 else page, query)
@@ -62,7 +53,7 @@ class ArtistDataSource constructor(
                                     }.await()
 
                                     withContext(Dispatchers.Default){
-                                        it.insert(item)
+                                        it.insert(item/*, page*/)
                                     }
 
                                     callback(item)
@@ -72,7 +63,11 @@ class ArtistDataSource constructor(
                             }, {
                             })
                     }
-            } else callback(it.getAll())
+                LogUtils.log("room - empty = $page")
+            } else {
+                callback(it.getItem(page))
+                LogUtils.log("room - get item = $page")
+            }
         }
     }
 

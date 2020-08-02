@@ -19,7 +19,8 @@ import com.sungbin.musicinformator.`interface`.GeniusInterface
 import com.sungbin.musicinformator.adapter.ArtistPagingAdapter
 import com.sungbin.musicinformator.model.ArtistItem
 import com.sungbin.musicinformator.paging.artist.ArtistDataSource
-import com.sungbin.musicinformator.room.ArtistDatabase
+import com.sungbin.musicinformator.database.ArtistDatabase
+import com.sungbin.musicinformator.ui.activity.MainActivity.Companion.database
 import com.sungbin.musicinformator.ui.dialog.ProgressDialog
 import com.sungbin.musicinformator.ui.dialog.SearchOptionBottomDialog
 import com.sungbin.musicinformator.utils.LogUtils
@@ -47,11 +48,11 @@ import javax.inject.Named
 class SearchFragment : Fragment() {
 
     companion object {
-        private val instance by lazy {
-            SearchFragment()
-        }
+        /*private val instance by lazy {
+            SearchFragment() //for Hilt
+        }*/
 
-        fun instance() = instance
+        fun instance() =  SearchFragment()
     }
 
     @Named("API")
@@ -175,7 +176,7 @@ class SearchFragment : Fragment() {
                     sortType,
                     perPage,
                     query,
-                    ArtistDatabase.getInstance(context!!)!!
+                    database
                 )
             }
         }

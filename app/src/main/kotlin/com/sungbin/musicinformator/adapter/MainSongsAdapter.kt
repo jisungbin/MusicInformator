@@ -26,10 +26,12 @@ class MainSongsAdapter constructor
     class ViewHolder(private val songItemBinding: LayoutMainSongItemBinding) :
         RecyclerView.ViewHolder(songItemBinding.root) {
 
-        fun bindViewHolder(item: SongItem) {
-            songItemBinding.tvSongArtist.isSelected = true
-            songItemBinding.tvSongName.isSelected = true
-            songItemBinding.item = item
+        fun bindViewHolder(song: SongItem) {
+            with(songItemBinding) {
+                tvSongArtist.isSelected = true
+                tvSongName.isSelected = true
+                item = song
+            }
         }
 
     }

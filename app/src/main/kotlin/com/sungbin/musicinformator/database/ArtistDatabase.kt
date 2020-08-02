@@ -1,4 +1,4 @@
-package com.sungbin.musicinformator.room
+package com.sungbin.musicinformator.database
 
 import android.content.Context
 import androidx.room.Database
@@ -16,12 +16,12 @@ abstract class ArtistDatabase : RoomDatabase() {
     abstract fun artistDao(): ArtistDao
 
     companion object {
-        private var INSTANCE: ArtistDatabase? = null
+        private var instance: ArtistDatabase? = null
 
-        fun getInstance(context: Context): ArtistDatabase? {
-            if (INSTANCE == null) {
+        fun getInstance(context: Context): ArtistDatabase {
+            if (instance == null) {
                 synchronized(ArtistDatabase::class) {
-                    INSTANCE = Room.databaseBuilder(
+                    instance = Room.databaseBuilder(
                         context.applicationContext,
                         ArtistDatabase::class.java,
                         "artist.db"
@@ -30,11 +30,11 @@ abstract class ArtistDatabase : RoomDatabase() {
                         .build()
                 }
             }
-            return INSTANCE
+            return instance!!
         }
+    }
 
-        fun destroyInstance() {
-            INSTANCE = null
-        }
+    fun destroyInstance() {
+        instance = null
     }
 }

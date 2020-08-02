@@ -26,11 +26,13 @@ class SongsAdapter constructor(
     class ViewHolder(private val songItemBinding: LayoutSongItemBinding) :
         RecyclerView.ViewHolder(songItemBinding.root) {
 
-        fun bindViewHolder(item: SongItem) {
-            songItemBinding.tvSongArtist.isSelected = true
-            songItemBinding.tvSongName.isSelected = true
-            if (!item.isRecentlySearched) songItemBinding.ivRemove.hide()
-            songItemBinding.item = item
+        fun bindViewHolder(song: SongItem) {
+            with(songItemBinding) {
+                tvSongArtist.isSelected = true
+                tvSongName.isSelected = true
+                if (!song.isRecentlySearched) ivRemove.hide()
+                item = song
+            }
         }
 
     }

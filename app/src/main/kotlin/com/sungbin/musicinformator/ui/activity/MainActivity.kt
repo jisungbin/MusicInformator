@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.commitNow
+import com.sungbin.musicinformator.MusicInformator.Companion.context
 import com.sungbin.musicinformator.R
+import com.sungbin.musicinformator.database.ArtistDatabase
 import com.sungbin.musicinformator.databinding.ActivityMainBinding
 import com.sungbin.musicinformator.ui.fragment.main.MainFragment
 import com.sungbin.musicinformator.ui.fragment.search.SearchFragment
@@ -19,6 +21,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
+    companion object {
+        val database by lazy {
+            ArtistDatabase.getInstance(context)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,4 +66,10 @@ class MainActivity : AppCompatActivity() {
             true
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        database.destroyInstance()
+    }
+
 }

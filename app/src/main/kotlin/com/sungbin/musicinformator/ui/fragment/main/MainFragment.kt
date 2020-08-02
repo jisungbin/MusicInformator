@@ -30,20 +30,22 @@ class MainFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        retainInstance = false
+
         val activity = requireActivity()
 
-        if (viewModel.songsItem.value.isNullOrEmpty())
-            viewModel.initSongs(activity)
-        if (viewModel.recentlySongsItem.value.isNullOrEmpty())
-            viewModel.initRecentlySongs()
-
-        rv_recently_played.adapter =
-            MainSongsAdapter(viewModel.recentlySongsItem.value ?: listOf(), activity)
-
-        if (!viewModel.songsItem.value.isNullOrEmpty()) {
-            rv_songs.visibility = View.VISIBLE
-            cl_empty_songs.visibility = View.GONE
-            rv_songs.adapter = MainSongsAdapter(viewModel.songsItem.value ?: listOf(), activity)
+        with (viewModel) {
+            if (songsItem.value.isNullOrEmpty())
+                initSongs(activity)
+            if (recentlySongsItem.value.isNullOrEmpty())
+                initRecentlySongs()
+            if (!songsItem.value.isNullOrEmpty()) {
+                rv_songs.visibility = View.VISIBLE
+                cl_empty_songs.visibility = View.GONE
+                rv_songs.adapter = MainSongsAdapter(viewModel.songsItem.value ?: listOf(), activity)
+            }
+            rv_recently_played.adapter =
+                MainSongsAdapter(recentlySongsItem.value ?: listOf(), activity)
         }
 
     }
