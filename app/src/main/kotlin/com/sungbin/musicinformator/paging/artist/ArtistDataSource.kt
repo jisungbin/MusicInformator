@@ -2,12 +2,11 @@ package com.sungbin.musicinformator.paging.artist
 
 import androidx.paging.PageKeyedDataSource
 import com.sungbin.musicinformator.`interface`.GeniusInterface
+import com.sungbin.musicinformator.database.ArtistDatabase
 import com.sungbin.musicinformator.di.DaggerGeniusComponent
 import com.sungbin.musicinformator.model.ArtistItem
-import com.sungbin.musicinformator.database.ArtistDatabase
 import com.sungbin.musicinformator.utils.LogUtils
 import com.sungbin.musicinformator.utils.ParseUtils
-import com.sungbin.musicinformator.utils.extension.toast
 import com.sungbin.musicinformator.utils.manager.TypeManager.ARTIST
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -20,7 +19,7 @@ import javax.inject.Named
  * Created by SungBin on 2020-08-01.
  */
 
-class ArtistDataSource constructor(
+class ArtistDataSource(
     private val sortType: String,
     private val perPage: Int,
     private val query: String,
@@ -50,13 +49,15 @@ class ArtistDataSource constructor(
                                 CoroutineScope(Dispatchers.Main).launch {
                                     val item = async {
                                         ParseUtils.getArtistSearchData(jsonObject)
-                                    }.await()
-
-                                    withContext(Dispatchers.Default){
-                                        it.insert(item/*, page*/)
                                     }
 
-                                    callback(item)
+                                    val value = item.await()
+
+                                    withContext(Dispatchers.Default) {
+                                        it.insert(value/*, page*/)
+                                    }
+
+                                    callback(value)
                                 }
                             }, { throwable ->
                                 LogUtils.log(throwable)

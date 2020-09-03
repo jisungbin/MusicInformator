@@ -15,7 +15,7 @@ import com.sungbin.musicinformator.model.ArtistItem
 abstract class ArtistDatabase : RoomDatabase() {
     abstract fun artistDao(): ArtistDao
 
-    companion object {
+    companion object { // 싱글톤, todo: DI 로 얻어오기 처리
         private var instance: ArtistDatabase? = null
 
         fun getInstance(context: Context): ArtistDatabase {

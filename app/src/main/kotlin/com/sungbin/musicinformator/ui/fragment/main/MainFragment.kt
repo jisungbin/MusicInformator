@@ -34,7 +34,7 @@ class MainFragment : Fragment() {
 
         val activity = requireActivity()
 
-        with (viewModel) {
+        with(viewModel) {
             if (songsItem.value.isNullOrEmpty())
                 initSongs(activity)
             if (recentlySongsItem.value.isNullOrEmpty())

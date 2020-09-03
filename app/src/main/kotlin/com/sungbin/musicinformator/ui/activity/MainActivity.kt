@@ -12,7 +12,6 @@ import com.sungbin.musicinformator.database.ArtistDatabase
 import com.sungbin.musicinformator.databinding.ActivityMainBinding
 import com.sungbin.musicinformator.ui.fragment.main.MainFragment
 import com.sungbin.musicinformator.ui.fragment.search.SearchFragment
-import com.sungbin.musicinformator.utils.LogUtils
 import com.sungbin.musicinformator.utils.SongUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
@@ -23,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     companion object {
-        val database by lazy {
+        val database by lazy { // todo: DI로 바꾸기, singleton 지향
             ArtistDatabase.getInstance(context)
         }
     }

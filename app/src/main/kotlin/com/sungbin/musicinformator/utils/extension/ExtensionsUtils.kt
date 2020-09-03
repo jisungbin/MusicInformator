@@ -20,7 +20,7 @@ fun toast(message: Any?, duration: Int = ToastUtils.SHORT, type: Int = ToastUtil
     ToastUtils.show(MusicInformator.context, message.toString(), duration, type)
 }
 
-fun View.hide(isGone: Boolean = false){
+fun View.hide(isGone: Boolean = false) {
     this.visibility = if (isGone) View.GONE else View.INVISIBLE
 }
 
@@ -41,7 +41,7 @@ operator fun View.get(@IdRes id: Int) = this.findViewById<View>(id)!!
 fun JsonObject.getString(keyword: String) = this[keyword].toString().replace("\"", "")
 
 @SuppressLint("ClickableViewAccessibility")
-fun EditText.setEndDrawableClickEvent(action: (View) -> Unit){
+fun EditText.setEndDrawableClickEvent(action: (View) -> Unit) {
     this.setOnTouchListener(View.OnTouchListener { view, event ->
         if (event.action == MotionEvent.ACTION_UP) {
             if (event.rawX >= this.right - this.compoundDrawables[2].bounds.width()

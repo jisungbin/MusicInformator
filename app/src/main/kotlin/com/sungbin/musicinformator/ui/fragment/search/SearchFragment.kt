@@ -19,7 +19,6 @@ import com.sungbin.musicinformator.`interface`.GeniusInterface
 import com.sungbin.musicinformator.adapter.ArtistPagingAdapter
 import com.sungbin.musicinformator.model.ArtistItem
 import com.sungbin.musicinformator.paging.artist.ArtistDataSource
-import com.sungbin.musicinformator.database.ArtistDatabase
 import com.sungbin.musicinformator.ui.activity.MainActivity.Companion.database
 import com.sungbin.musicinformator.ui.dialog.ProgressDialog
 import com.sungbin.musicinformator.ui.dialog.SearchOptionBottomDialog
@@ -52,7 +51,7 @@ class SearchFragment : Fragment() {
             SearchFragment() //for Hilt
         }*/
 
-        fun instance() =  SearchFragment()
+        fun instance() = SearchFragment()
     }
 
     @Named("API")

@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("dagger.hilt.android.plugin")
+    id("name.remal.check-dependency-updates") version "1.0.211"
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
@@ -14,7 +15,7 @@ android {
         versionCode = Application.versionCode
         versionName = Application.versionName
         multiDexEnabled = true
-        setProperty("archivesBaseName", "v$versionName($versionCode)")
+        setProperty("archivesBaseName", "v$versionName ($versionCode)")
     }
 
     buildFeatures {
@@ -24,17 +25,18 @@ android {
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
+            isShrinkResources = true
+            isDebuggable = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
 
     sourceSets {
-        getByName("androidTest").java.srcDirs("src/androidTest/kotlin")
         getByName("main").java.srcDirs("src/main/kotlin")
-        getByName("test").java.srcDirs("src/test/kotlin")
     }
 
     packagingOptions {
+        exclude("META-INF/DEPENDENCIES")
         exclude ("META-INF/library_release.kotlin_module")
     }
 
@@ -49,51 +51,50 @@ android {
 }
 
 dependencies {
-    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+    fun def(vararg dependencies: String) {
+        for (dependency in dependencies) implementation(dependency)
+    }
 
-    implementation(Dependencies.Essential.Anko)
-    implementation(Dependencies.Essential.CoreKtx)
-    implementation(Dependencies.Essential.Legacy)
-    implementation(Dependencies.Essential.Kotlin)
-    implementation(Dependencies.Essential.AppCompat)
-    implementation(Dependencies.Essential.FragmentKtx)
-    implementation(Dependencies.Essential.LifeCycleViewModel)
-    implementation(Dependencies.Essential.LifeCycleExtensions)
+    def(
+        Dependencies.Network.Retrofit,
+        Dependencies.Network.OkHttp,
+        Dependencies.Network.LoggingInterceptor,
 
-    implementation(Dependencies.Network.OkHttp)
-    implementation(Dependencies.Network.Retrofit)
-    implementation(Dependencies.Network.RxRetrofit)
-    implementation(Dependencies.Network.LoggingInterceptor)
+        Dependencies.Rx.Kotlin,
+        Dependencies.Rx.Android,
+        Dependencies.Rx.Retrofit,
+        Dependencies.Rx.Room,
+        Dependencies.Rx.Paging,
 
-    implementation(Dependencies.Rx.Java)
-    implementation(Dependencies.Rx.Kotlin)
-    implementation(Dependencies.Rx.Android)
+        Dependencies.Essential.AppCompat,
+        Dependencies.Essential.Anko,
+        Dependencies.Essential.Kotlin,
+        Dependencies.Essential.LifeCycleExtensions,
+        Dependencies.Essential.LifeCycleViewModel,
 
-    implementation(Dependencies.Di.Hilt)
-    implementation(Dependencies.Di.Dagger)
-    implementation(Dependencies.Di.HiltCommon)
-    implementation(Dependencies.Di.HiltLifeCycle)
+        Dependencies.Ktx.Paging,
+        Dependencies.Ktx.Room,
+        Dependencies.Ktx.Core,
+        Dependencies.Ktx.Fragment,
 
-    implementation(Dependencies.Ui.Glide)
-    implementation(Dependencies.Ui.CardView)
-    implementation(Dependencies.Ui.ConstraintLayout)
+        Dependencies.Di.Dagger,
+        Dependencies.Di.Hilt,
 
-    implementation(Dependencies.Utils.AndroidUtils)
-    implementation(Dependencies.Utils.CrashReporter)
-    implementation(Dependencies.Utils.GsonConverter)
+        Dependencies.Ui.YoYo,
+        Dependencies.Ui.Lottie,
+        Dependencies.Ui.Material,
+        Dependencies.Ui.Glide,
+        Dependencies.Ui.CardView,
+        Dependencies.Ui.ConstraintLayout,
 
-    implementation(Dependencies.Animator.Tool)
-    implementation(Dependencies.Animator.Yoyo)
-    implementation(Dependencies.Animator.Lottie)
+        Dependencies.Util.GsonConverter,
+        Dependencies.Util.YoyoHelper,
+        Dependencies.Util.AndroidUtils,
+        Dependencies.Util.CrashReporter
+    )
 
-    implementation(Dependencies.AndroidX.RoomRx)
-    implementation(Dependencies.AndroidX.PagingRx)
-    implementation(Dependencies.AndroidX.RoomRuntime)
-    implementation(Dependencies.AndroidX.PagingRuntime)
-
-    kapt(Dependencies.Ui.GlideCompiler)
+    kapt(Dependencies.Util.GlideCompiler)
     kapt(Dependencies.Di.DaggerCompiler)
-    kapt(Dependencies.AndroidX.RoomCompiler)
-    kapt(Dependencies.Di.HiltGoogleCompiler)
-    kapt(Dependencies.Di.HiltAndroidXCompiler)
+    kapt(Dependencies.Jetpack.RoomCompiler)
+    kapt(Dependencies.Di.HiltCompiler)
 }

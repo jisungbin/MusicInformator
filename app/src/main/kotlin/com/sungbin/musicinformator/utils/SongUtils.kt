@@ -12,16 +12,56 @@ import com.sungbin.musicinformator.model.SongItem
 object SongUtils {
     private val artworkUri = Uri.parse("content://media/external/audio/albumart")
     val sampleSongItemList = arrayListOf<SongItem>(
-        SongItem("다시 여기 바닷가", "싹쓰리", "https://musicmeta-phinf.pstatic.net/album/004/673/4673490.jpg?type=r32Fll&v=20200718175908"),
-        SongItem("그 여름을 틀어줘", "싹쓰리", "https://musicmeta-phinf.pstatic.net/album/004/707/4707332.jpg?type=r32Fll&v=20200730114808"),
-        SongItem("마리아", "화사", "https://musicmeta-phinf.pstatic.net/album/004/614/4614746.jpg?type=r32Fll&v=20200629184748"),
-        SongItem("How You Like That", "BLACKPINK", "https://musicmeta-phinf.pstatic.net/album/004/613/4613637.jpg?type=r32Fll&v=20200630163708"),
-        SongItem("Summer Hate", "ZICO", "https://musicmeta-phinf.pstatic.net/album/004/616/4616999.jpg?type=r32Fll&v=20200701175911"),
-        SongItem("보라빛 밤", "선미", "https://musicmeta-phinf.pstatic.net/album/004/614/4614748.jpg?type=r32Fll&v=20200629184551"),
-        SongItem("에잇", "아이유", "https://musicmeta-phinf.pstatic.net/album/004/550/4550593.jpg?type=r32Fll&v=20200508163228"),
-        SongItem("아로하", "조정석", "https://musicmeta-phinf.pstatic.net/album/004/498/4498641.jpg?type=r32Fll&v=20200327115935"),
-        SongItem("Sexual", "Neiked", "https://musicmeta-phinf.pstatic.net/album/000/662/662857.jpg?type=r204Fll&v=20200218185711"),
-        SongItem("아무노래", "ZICO", "https://musicmeta-phinf.pstatic.net/album/004/413/4413282.jpg?type=r32Fll&v=20200205180913")
+        SongItem(
+            "다시 여기 바닷가",
+            "싹쓰리",
+            "https://musicmeta-phinf.pstatic.net/album/004/673/4673490.jpg?type=r32Fll&v=20200718175908"
+        ),
+        SongItem(
+            "그 여름을 틀어줘",
+            "싹쓰리",
+            "https://musicmeta-phinf.pstatic.net/album/004/707/4707332.jpg?type=r32Fll&v=20200730114808"
+        ),
+        SongItem(
+            "마리아",
+            "화사",
+            "https://musicmeta-phinf.pstatic.net/album/004/614/4614746.jpg?type=r32Fll&v=20200629184748"
+        ),
+        SongItem(
+            "How You Like That",
+            "BLACKPINK",
+            "https://musicmeta-phinf.pstatic.net/album/004/613/4613637.jpg?type=r32Fll&v=20200630163708"
+        ),
+        SongItem(
+            "Summer Hate",
+            "ZICO",
+            "https://musicmeta-phinf.pstatic.net/album/004/616/4616999.jpg?type=r32Fll&v=20200701175911"
+        ),
+        SongItem(
+            "보라빛 밤",
+            "선미",
+            "https://musicmeta-phinf.pstatic.net/album/004/614/4614748.jpg?type=r32Fll&v=20200629184551"
+        ),
+        SongItem(
+            "에잇",
+            "아이유",
+            "https://musicmeta-phinf.pstatic.net/album/004/550/4550593.jpg?type=r32Fll&v=20200508163228"
+        ),
+        SongItem(
+            "아로하",
+            "조정석",
+            "https://musicmeta-phinf.pstatic.net/album/004/498/4498641.jpg?type=r32Fll&v=20200327115935"
+        ),
+        SongItem(
+            "Sexual",
+            "Neiked",
+            "https://musicmeta-phinf.pstatic.net/album/000/662/662857.jpg?type=r204Fll&v=20200218185711"
+        ),
+        SongItem(
+            "아무노래",
+            "ZICO",
+            "https://musicmeta-phinf.pstatic.net/album/004/413/4413282.jpg?type=r32Fll&v=20200205180913"
+        )
     )
 
     fun getAllAudioData(context: Context): ArrayList<SongItem> {
@@ -54,7 +94,7 @@ object SongUtils {
 
     fun getAlbumCoverUri(
         albumId: Long
-    ) = ContentUris.withAppendedId(artworkUri, albumId) as Uri
+    ) = ContentUris.withAppendedId(artworkUri, albumId)
 
     fun getAlbumCoverBitmap(
         context: Context,
