@@ -14,7 +14,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.airbnb.lottie.LottieAnimationView
 import com.sungbin.musicinformator.R
-import com.sungbin.musicinformator.utils.extension.plusAssign
+import com.sungbin.musicinformator.util.extension.plusAssign
 
 
 class ProgressDialog constructor(val activity: Activity) {

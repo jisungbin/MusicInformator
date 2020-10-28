@@ -5,9 +5,9 @@ import com.sungbin.musicinformator.`interface`.GeniusInterface
 import com.sungbin.musicinformator.database.ArtistDatabase
 import com.sungbin.musicinformator.di.DaggerGeniusComponent
 import com.sungbin.musicinformator.model.ArtistItem
-import com.sungbin.musicinformator.utils.LogUtils
-import com.sungbin.musicinformator.utils.ParseUtils
-import com.sungbin.musicinformator.utils.manager.TypeManager.ARTIST
+import com.sungbin.musicinformator.util.LogUtils
+import com.sungbin.musicinformator.util.ParseUtils
+import com.sungbin.musicinformator.util.manager.TypeManager.ARTIST
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.*

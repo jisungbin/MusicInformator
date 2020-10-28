@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sungbin.musicinformator.R
 import com.sungbin.musicinformator.databinding.LayoutSongItemBinding
 import com.sungbin.musicinformator.model.SongItem
-import com.sungbin.musicinformator.utils.extension.hide
+import com.sungbin.musicinformator.util.extension.hide
 
 
 /**

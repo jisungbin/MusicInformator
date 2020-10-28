@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sungbin.musicinformator.model.SongItem
-import com.sungbin.musicinformator.utils.SongUtils
+import com.sungbin.musicinformator.util.SongUtils
 
 class MainViewModel : ViewModel() {
 

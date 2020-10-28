@@ -1,4 +1,4 @@
-package com.sungbin.musicinformator.utils.manager
+package com.sungbin.musicinformator.util.manager
 
 object GeniusManager {
     const val API_URI = "https://api.genius.com/"

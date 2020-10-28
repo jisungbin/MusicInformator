@@ -12,7 +12,7 @@ import com.sungbin.musicinformator.database.ArtistDatabase
 import com.sungbin.musicinformator.databinding.ActivityMainBinding
 import com.sungbin.musicinformator.ui.fragment.main.MainFragment
 import com.sungbin.musicinformator.ui.fragment.search.SearchFragment
-import com.sungbin.musicinformator.utils.SongUtils
+import com.sungbin.musicinformator.util.SongUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 

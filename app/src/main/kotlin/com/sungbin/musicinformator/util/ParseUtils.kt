@@ -1,9 +1,9 @@
-package com.sungbin.musicinformator.utils
+package com.sungbin.musicinformator.util
 
 import com.google.gson.JsonObject
 import com.sungbin.musicinformator.model.ArtistItem
 import com.sungbin.musicinformator.model.SongItem
-import com.sungbin.musicinformator.utils.extension.getString
+import com.sungbin.musicinformator.util.extension.getString
 
 object ParseUtils {
 

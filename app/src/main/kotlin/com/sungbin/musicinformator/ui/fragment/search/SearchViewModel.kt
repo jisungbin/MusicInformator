@@ -2,7 +2,7 @@ package com.sungbin.musicinformator.ui.fragment.search
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.sungbin.musicinformator.utils.SongUtils
+import com.sungbin.musicinformator.util.SongUtils
 
 class SearchViewModel : ViewModel() {
 

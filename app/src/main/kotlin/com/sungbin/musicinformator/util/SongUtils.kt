@@ -1,4 +1,4 @@
-package com.sungbin.musicinformator.utils
+package com.sungbin.musicinformator.util
 
 import android.content.ContentUris
 import android.content.Context

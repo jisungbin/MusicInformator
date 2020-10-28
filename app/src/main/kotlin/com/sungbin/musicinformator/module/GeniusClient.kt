@@ -1,6 +1,6 @@
 package com.sungbin.musicinformator.module
 
-import com.sungbin.musicinformator.utils.manager.GeniusManager
+import com.sungbin.musicinformator.util.manager.GeniusManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

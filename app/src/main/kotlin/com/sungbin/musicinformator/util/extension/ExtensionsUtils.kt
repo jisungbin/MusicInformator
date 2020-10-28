@@ -1,4 +1,4 @@
-package com.sungbin.musicinformator.utils.extension
+package com.sungbin.musicinformator.util.extension
 
 import android.annotation.SuppressLint
 import android.view.MotionEvent
