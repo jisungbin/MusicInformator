@@ -13,17 +13,21 @@ import kotlinx.android.synthetic.main.fragment_main.*
 class MainFragment : Fragment() {
 
     companion object {
-        private val instance by lazy {
-            MainFragment()
-        }
+        lateinit var mainFragment: MainFragment
 
-        fun instance() = instance
+        fun instance(): MainFragment {
+            if (!::mainFragment.isInitialized) {
+                mainFragment = MainFragment()
+            }
+            return mainFragment
+        }
     }
 
     private val viewModel by viewModels<MainViewModel>()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ) = inflater.inflate(R.layout.fragment_main, container, false)!!
 
@@ -47,7 +51,5 @@ class MainFragment : Fragment() {
             rv_recently_played.adapter =
                 MainSongsAdapter(recentlySongsItem.value ?: listOf(), activity)
         }
-
     }
-
 }
